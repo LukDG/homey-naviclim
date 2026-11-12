@@ -1,0 +1,411 @@
+{
+  "name": {
+    "en": "Naviclim AC",
+    "nl": "Naviclim airco",
+    "de": "Naviclim Klimaanlage",
+    "fr": "Climatiseur Naviclim",
+    "it": "Condizionatore Naviclim",
+    "sv": "Naviclim luftkonditionering",
+    "no": "Naviclim klimaanlegg",
+    "es": "Aire acondicionado Naviclim",
+    "da": "Naviclim aircondition",
+    "ru": "Кондиционер Naviclim",
+    "pl": "Klimatyzator Naviclim",
+    "ko": "Naviclim 에어컨",
+    "ar": "مكيف Naviclim"
+  },
+  "class": "airconditioning",
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "zigbee"
+  ],
+  "capabilities": [
+    "onoff",
+    "ac_mode",
+    "target_temperature.cooling",
+    "target_temperature.heating",
+    "measure_temperature",
+    "ac_fan_speed",
+    "ac_louver"
+  ],
+  "capabilitiesOptions": {
+    "target_temperature.cooling": {
+      "title": {
+        "en": "Cooling target",
+        "nl": "Doeltemperatuur koelen",
+        "de": "Zieltemperatur Kühlen",
+        "fr": "Consigne de refroidissement",
+        "it": "Temperatura obiettivo raffreddamento",
+        "sv": "Måltemperatur kyla",
+        "no": "Måltemperatur kjøling",
+        "es": "Temperatura objetivo de frío",
+        "da": "Måltemperatur køling",
+        "ru": "Целевая температура охлаждения",
+        "pl": "Temperatura docelowa chłodzenia",
+        "ko": "냉방 목표 온도",
+        "ar": "درجة الحرارة المستهدفة للتبريد"
+      },
+      "min": 18,
+      "max": 30,
+      "step": 0.5
+    },
+    "target_temperature.heating": {
+      "title": {
+        "en": "Heating target",
+        "nl": "Doeltemperatuur verwarmen",
+        "de": "Zieltemperatur Heizen",
+        "fr": "Consigne de chauffage",
+        "it": "Temperatura obiettivo riscaldamento",
+        "sv": "Måltemperatur värme",
+        "no": "Måltemperatur varme",
+        "es": "Temperatura objetivo de calor",
+        "da": "Måltemperatur varme",
+        "ru": "Целевая температура обогрева",
+        "pl": "Temperatura docelowa grzania",
+        "ko": "난방 목표 온도",
+        "ar": "درجة الحرارة المستهدفة للتدفئة"
+      },
+      "min": 16,
+      "max": 30,
+      "step": 0.5
+    }
+  },
+  "images": {
+    "small": "/drivers/naviclim-ac/assets/images/small.png",
+    "large": "/drivers/naviclim-ac/assets/images/large.png",
+    "xlarge": "/drivers/naviclim-ac/assets/images/xlarge.png"
+  },
+  "zigbee": {
+    "manufacturerName": "ATLANTIC GROUP",
+    "productId": [
+      "Adapter Zigbee FUJITSU"
+    ],
+    "endpoints": {
+      "1": {
+        "clusters": [
+          0,
+          3,
+          513,
+          514,
+          64515
+        ],
+        "bindings": [
+          513,
+          514
+        ]
+      }
+    },
+    "learnmode": {
+      "instruction": {
+        "en": "Reset the Naviclim interface and put it in pairing mode (see its installation notice), then wait for Homey to find it.",
+        "nl": "Reset de Naviclim-interface en zet hem in koppelmodus (zie de installatiehandleiding). Wacht tot Homey hem vindt.",
+        "de": "Setze die Naviclim-Schnittstelle zurück und versetze sie in den Kopplungsmodus (siehe Installationsanleitung). Warte, bis Homey sie findet.",
+        "fr": "Réinitialisez l’interface Naviclim et mettez-la en mode appairage (voir sa notice d’installation). Attendez que Homey la trouve.",
+        "it": "Ripristina l’interfaccia Naviclim e mettila in modalità di associazione (vedi il manuale di installazione). Attendi che Homey la trovi.",
+        "sv": "Återställ Naviclim-gränssnittet och sätt det i parkopplingsläge (se installationsanvisningen). Vänta tills Homey hittar det.",
+        "no": "Tilbakestill Naviclim-grensesnittet og sett det i paringsmodus (se installasjonsveiledningen). Vent til Homey finner det.",
+        "es": "Restablece la interfaz Naviclim y ponla en modo de emparejamiento (consulta su manual de instalación). Espera a que Homey la encuentre.",
+        "da": "Nulstil Naviclim-interfacet, og sæt det i parringstilstand (se installationsvejledningen). Vent, til Homey finder det.",
+        "ru": "Сбросьте интерфейс Naviclim и переведите его в режим сопряжения (см. руководство по установке). Дождитесь, пока Homey его найдёт.",
+        "pl": "Zresetuj interfejs Naviclim i przełącz go w tryb parowania (zobacz instrukcję instalacji). Poczekaj, aż Homey go znajdzie.",
+        "ko": "Naviclim 인터페이스를 초기화하고 페어링 모드로 설정하세요(설치 설명서 참조). Homey가 찾을 때까지 기다리세요.",
+        "ar": "أعد ضبط واجهة Naviclim وضعها في وضع الاقتران (راجع دليل التركيب). انتظر حتى يعثر عليها Homey."
+      }
+    }
+  },
+  "settings": [
+    {
+      "id": "on_mode",
+      "type": "dropdown",
+      "value": "last",
+      "label": {
+        "en": "Mode when switched on",
+        "nl": "Modus bij inschakelen",
+        "de": "Modus beim Einschalten",
+        "fr": "Mode à l’allumage",
+        "it": "Modalità all’accensione",
+        "sv": "Läge vid påslagning",
+        "no": "Modus ved innkobling",
+        "es": "Modo al encender",
+        "da": "Tilstand ved tænding",
+        "ru": "Режим при включении",
+        "pl": "Tryb po włączeniu",
+        "ko": "켤 때 모드",
+        "ar": "الوضع عند التشغيل"
+      },
+      "hint": {
+        "en": "Used when the on/off button or a flow turns the AC on. Choosing a mode directly always uses that mode.",
+        "nl": "Wordt gebruikt wanneer de aan/uit-knop of een flow de airco inschakelt. Kies je rechtstreeks een modus, dan wordt altijd die modus gebruikt.",
+        "de": "Wird verwendet, wenn die Ein/Aus-Taste oder ein Flow die Klimaanlage einschaltet. Wenn du direkt einen Modus wählst, wird immer dieser verwendet.",
+        "fr": "Utilisé lorsque le bouton marche/arrêt ou un Flow allume le climatiseur. Si vous choisissez directement un mode, c’est toujours celui-ci qui est utilisé.",
+        "it": "Usata quando il pulsante on/off o un Flow accende il condizionatore. Se scegli direttamente una modalità, viene sempre usata quella.",
+        "sv": "Används när på/av-knappen eller ett Flow slår på luftkonditioneringen. Om du väljer ett läge direkt används alltid det läget.",
+        "no": "Brukes når av/på-knappen eller en Flow slår på klimaanlegget. Hvis du velger en modus direkte, brukes alltid den.",
+        "es": "Se usa cuando el botón de encendido/apagado o un Flow enciende el aire acondicionado. Si eliges un modo directamente, siempre se usa ese.",
+        "da": "Bruges, når tænd/sluk-knappen eller et Flow tænder airconditionanlægget. Vælger du direkte en tilstand, bruges altid den.",
+        "ru": "Используется, когда кнопка включения/выключения или Flow включает кондиционер. Если вы выбираете режим напрямую, всегда применяется он.",
+        "pl": "Używany, gdy przycisk włącz/wyłącz lub Flow włącza klimatyzator. Jeśli wybierzesz tryb bezpośrednio, zawsze zostanie użyty ten tryb.",
+        "ko": "켜기/끄기 버튼이나 Flow로 에어컨을 켤 때 사용됩니다. 모드를 직접 선택하면 항상 그 모드가 사용됩니다.",
+        "ar": "يُستخدم عند تشغيل المكيف بزر التشغيل/الإيقاف أو بواسطة Flow. إذا اخترت وضعًا مباشرة، فسيُستخدم هذا الوضع دائمًا."
+      },
+      "values": [
+        {
+          "id": "last",
+          "label": {
+            "en": "Last used mode",
+            "nl": "Laatst gebruikte modus",
+            "de": "Zuletzt verwendeter Modus",
+            "fr": "Dernier mode utilisé",
+            "it": "Ultima modalità usata",
+            "sv": "Senast använda läge",
+            "no": "Sist brukte modus",
+            "es": "Último modo usado",
+            "da": "Senest brugte tilstand",
+            "ru": "Последний использованный режим",
+            "pl": "Ostatnio używany tryb",
+            "ko": "마지막 사용 모드",
+            "ar": "آخر وضع مستخدم"
+          }
+        },
+        {
+          "id": "auto",
+          "label": {
+            "en": "Auto",
+            "nl": "Auto",
+            "de": "Auto",
+            "fr": "Auto",
+            "it": "Auto",
+            "sv": "Auto",
+            "no": "Auto",
+            "es": "Auto",
+            "da": "Auto",
+            "ru": "Авто",
+            "pl": "Auto",
+            "ko": "자동",
+            "ar": "تلقائي"
+          }
+        },
+        {
+          "id": "cool",
+          "label": {
+            "en": "Cool",
+            "nl": "Koelen",
+            "de": "Kühlen",
+            "fr": "Froid",
+            "it": "Raffreddamento",
+            "sv": "Kyla",
+            "no": "Kjøling",
+            "es": "Frío",
+            "da": "Køling",
+            "ru": "Охлаждение",
+            "pl": "Chłodzenie",
+            "ko": "냉방",
+            "ar": "تبريد"
+          }
+        },
+        {
+          "id": "heat",
+          "label": {
+            "en": "Heat",
+            "nl": "Verwarmen",
+            "de": "Heizen",
+            "fr": "Chaud",
+            "it": "Riscaldamento",
+            "sv": "Värme",
+            "no": "Varme",
+            "es": "Calor",
+            "da": "Varme",
+            "ru": "Обогрев",
+            "pl": "Grzanie",
+            "ko": "난방",
+            "ar": "تدفئة"
+          }
+        },
+        {
+          "id": "fan_only",
+          "label": {
+            "en": "Fan only",
+            "nl": "Alleen ventilator",
+            "de": "Nur Lüfter",
+            "fr": "Ventilation seule",
+            "it": "Solo ventilazione",
+            "sv": "Endast fläkt",
+            "no": "Kun vifte",
+            "es": "Solo ventilador",
+            "da": "Kun ventilator",
+            "ru": "Только вентилятор",
+            "pl": "Tylko wentylator",
+            "ko": "송풍",
+            "ar": "مروحة فقط"
+          }
+        }
+      ]
+    },
+    {
+      "id": "group",
+      "type": "dropdown",
+      "value": "none",
+      "label": {
+        "en": "Outdoor unit group",
+        "nl": "Buitenunit-groep",
+        "de": "Außengeräte-Gruppe",
+        "fr": "Groupe d’unité extérieure",
+        "it": "Gruppo unità esterna",
+        "sv": "Utomhusenhetsgrupp",
+        "no": "Utedelgruppe",
+        "es": "Grupo de unidad exterior",
+        "da": "Udendørsenhedsgruppe",
+        "ru": "Группа наружного блока",
+        "pl": "Grupa jednostki zewnętrznej",
+        "ko": "실외기 그룹",
+        "ar": "مجموعة الوحدة الخارجية"
+      },
+      "hint": {
+        "en": "Indoor units that share one outdoor unit belong in the same group. The first unit in the group that is switched on is the master; the other units that are on are followers. While the master heats, followers cannot cool or dry, and the other way around. When every unit is off, nobody has a role.",
+        "nl": "Binnenunits die dezelfde buitenunit delen horen in dezelfde groep. Het eerste toestel in de groep dat aan staat is de master; de andere toestellen die aan staan zijn volgers. Zolang de master verwarmt, kunnen volgers niet koelen of ontvochtigen, en omgekeerd. Staat alles uit, dan heeft niemand een rol.",
+        "de": "Innengeräte mit gemeinsamem Außengerät gehören in dieselbe Gruppe. Das erste eingeschaltete Gerät der Gruppe ist der Master, die anderen eingeschalteten Geräte sind Folger. Solange der Master heizt, können Folger nicht kühlen oder entfeuchten – und umgekehrt. Sind alle Geräte aus, hat niemand eine Rolle.",
+        "fr": "Les unités intérieures qui partagent une même unité extérieure appartiennent au même groupe. Le premier appareil allumé du groupe est le maître ; les autres appareils allumés sont des suiveurs. Tant que le maître chauffe, les suiveurs ne peuvent ni refroidir ni déshumidifier, et inversement. Si tout est éteint, personne n’a de rôle.",
+        "it": "Le unità interne che condividono la stessa unità esterna appartengono allo stesso gruppo. Il primo dispositivo acceso del gruppo è il master; gli altri dispositivi accesi sono secondari. Finché il master riscalda, i secondari non possono raffreddare né deumidificare, e viceversa. Se tutto è spento, nessuno ha un ruolo.",
+        "sv": "Inomhusenheter som delar utomhusenhet hör till samma grupp. Den första påslagna enheten i gruppen är master; de andra påslagna enheterna är följare. Så länge mastern värmer kan följare inte kyla eller avfukta, och tvärtom. När allt är avstängt har ingen någon roll.",
+        "no": "Innedeler som deler samme utedel hører til samme gruppe. Den første påslåtte enheten i gruppen er master; de andre påslåtte enhetene er følgere. Så lenge masteren varmer, kan følgere ikke kjøle eller avfukte, og omvendt. Når alt er av, har ingen noen rolle.",
+        "es": "Las unidades interiores que comparten una unidad exterior pertenecen al mismo grupo. El primer dispositivo encendido del grupo es el maestro; los demás dispositivos encendidos son seguidores. Mientras el maestro calienta, los seguidores no pueden enfriar ni deshumidificar, y viceversa. Si todo está apagado, nadie tiene una función.",
+        "da": "Indedele, der deler udedel, hører til i samme gruppe. Den første tændte enhed i gruppen er master; de andre tændte enheder er følgere. Så længe masteren varmer, kan følgere ikke køle eller affugte, og omvendt. Når alt er slukket, har ingen en rolle.",
+        "ru": "Внутренние блоки с общим наружным блоком относятся к одной группе. Первое включённое устройство группы — ведущее; остальные включённые — ведомые. Пока ведущее обогревает, ведомые не могут охлаждать или осушать, и наоборот. Когда всё выключено, ролей нет.",
+        "pl": "Jednostki wewnętrzne ze wspólną jednostką zewnętrzną należą do tej samej grupy. Pierwsze włączone urządzenie w grupie jest nadrzędne; pozostałe włączone są podrzędne. Dopóki nadrzędne grzeje, podrzędne nie mogą chłodzić ani osuszać, i odwrotnie. Gdy wszystko jest wyłączone, nikt nie ma roli.",
+        "ko": "같은 실외기를 공유하는 실내기는 같은 그룹에 넣으세요. 그룹에서 가장 먼저 켜진 기기가 마스터이고, 나머지 켜진 기기는 팔로워입니다. 마스터가 난방 중이면 팔로워는 냉방이나 제습을 할 수 없고, 반대도 마찬가지입니다. 모두 꺼져 있으면 역할이 없습니다.",
+        "ar": "تنتمي الوحدات الداخلية التي تشترك في وحدة خارجية واحدة إلى المجموعة نفسها. أول جهاز مُشغَّل في المجموعة هو الرئيسي، والأجهزة الأخرى العاملة تابعة. ما دام الجهاز الرئيسي يدفئ لا تستطيع التابعة التبريد أو إزالة الرطوبة، والعكس صحيح. وعندما تكون كل الأجهزة متوقفة لا يكون لأي منها دور."
+      },
+      "values": [
+        {
+          "id": "none",
+          "label": {
+            "en": "None",
+            "nl": "Geen",
+            "de": "Keine",
+            "fr": "Aucun",
+            "it": "Nessuno",
+            "sv": "Ingen",
+            "no": "Ingen",
+            "es": "Ninguno",
+            "da": "Ingen",
+            "ru": "Нет",
+            "pl": "Brak",
+            "ko": "없음",
+            "ar": "بلا"
+          }
+        },
+        {
+          "id": "1",
+          "label": {
+            "en": "1"
+          }
+        },
+        {
+          "id": "2",
+          "label": {
+            "en": "2"
+          }
+        },
+        {
+          "id": "3",
+          "label": {
+            "en": "3"
+          }
+        },
+        {
+          "id": "4",
+          "label": {
+            "en": "4"
+          }
+        },
+        {
+          "id": "5",
+          "label": {
+            "en": "5"
+          }
+        },
+        {
+          "id": "6",
+          "label": {
+            "en": "6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "conflict_action",
+      "type": "dropdown",
+      "value": "off",
+      "label": {
+        "en": "If the master switches to the opposite mode",
+        "nl": "Als de master naar de tegenovergestelde modus gaat",
+        "de": "Wenn der Master in den gegenteiligen Modus wechselt",
+        "fr": "Si le maître passe au mode opposé",
+        "it": "Se il master passa alla modalità opposta",
+        "sv": "Om mastern byter till motsatt läge",
+        "no": "Hvis masteren bytter til motsatt modus",
+        "es": "Si el maestro cambia al modo opuesto",
+        "da": "Hvis masteren skifter til den modsatte tilstand",
+        "ru": "Если ведущий переключается в противоположный режим",
+        "pl": "Jeśli jednostka nadrzędna przełączy się na tryb przeciwny",
+        "ko": "마스터가 반대 모드로 전환될 때",
+        "ar": "إذا انتقلت الوحدة الرئيسية إلى الوضع المعاكس"
+      },
+      "hint": {
+        "en": "Only used for followers: what this unit does when the master starts heating while this unit is cooling or drying, or the other way around.",
+        "nl": "Alleen voor volgers: wat deze unit doet wanneer de master gaat verwarmen terwijl deze unit koelt of ontvochtigt, of omgekeerd.",
+        "de": "Nur für Folger: was dieses Gerät tut, wenn der Master zu heizen beginnt, während dieses Gerät kühlt oder entfeuchtet – oder umgekehrt.",
+        "fr": "Uniquement pour les suiveurs : ce que fait cette unité lorsque le maître se met à chauffer alors qu’elle refroidit ou déshumidifie, ou inversement.",
+        "it": "Solo per le unità secondarie: cosa fa questa unità quando il master inizia a riscaldare mentre questa raffredda o deumidifica, o viceversa.",
+        "sv": "Endast för följare: vad den här enheten gör när mastern börjar värma medan den kyler eller avfuktar, eller tvärtom.",
+        "no": "Bare for følgere: hva denne enheten gjør når masteren begynner å varme mens denne kjøler eller avfukter, eller omvendt.",
+        "es": "Solo para seguidores: qué hace esta unidad cuando el maestro empieza a calentar mientras ella enfría o deshumidifica, o al revés.",
+        "da": "Kun for følgere: hvad denne enhed gør, når masteren begynder at varme, mens denne køler eller affugter, eller omvendt.",
+        "ru": "Только для ведомых: что делает этот блок, когда ведущий начинает обогрев, пока этот блок охлаждает или осушает, или наоборот.",
+        "pl": "Tylko dla jednostek podrzędnych: co robi ta jednostka, gdy nadrzędna zaczyna grzać, a ta chłodzi lub osusza, lub odwrotnie.",
+        "ko": "팔로워에만 적용: 이 기기가 냉방 또는 제습 중일 때 마스터가 난방을 시작하는 경우(또는 그 반대) 이 기기의 동작입니다.",
+        "ar": "للوحدات التابعة فقط: ما تفعله هذه الوحدة عندما تبدأ الوحدة الرئيسية التدفئة بينما تعمل هذه الوحدة على التبريد أو إزالة الرطوبة، أو العكس."
+      },
+      "values": [
+        {
+          "id": "off",
+          "label": {
+            "en": "Switch this unit off",
+            "nl": "Deze unit uitschakelen",
+            "de": "Dieses Gerät ausschalten",
+            "fr": "Éteindre cette unité",
+            "it": "Spegni questa unità",
+            "sv": "Stäng av den här enheten",
+            "no": "Slå av denne enheten",
+            "es": "Apagar esta unidad",
+            "da": "Sluk denne enhed",
+            "ru": "Выключить этот блок",
+            "pl": "Wyłącz tę jednostkę",
+            "ko": "이 기기 끄기",
+            "ar": "إيقاف هذه الوحدة"
+          }
+        },
+        {
+          "id": "fan_only",
+          "label": {
+            "en": "Set this unit to fan only",
+            "nl": "Deze unit op alleen ventilator zetten",
+            "de": "Dieses Gerät auf „Nur Lüfter“ stellen",
+            "fr": "Mettre cette unité en ventilation seule",
+            "it": "Imposta questa unità su solo ventilazione",
+            "sv": "Sätt den här enheten på endast fläkt",
+            "no": "Sett denne enheten til kun vifte",
+            "es": "Poner esta unidad en solo ventilador",
+            "da": "Sæt denne enhed til kun ventilator",
+            "ru": "Перевести этот блок в режим «только вентилятор»",
+            "pl": "Ustaw tę jednostkę na tylko wentylator",
+            "ko": "이 기기를 송풍으로 설정",
+            "ar": "ضبط هذه الوحدة على مروحة فقط"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "group": {
+    "blocked_heat": "Chłodzenie i osuszanie nie są możliwe: {{name}} grzeje na tej samej jednostce zewnętrznej (grupa {{group}}).",
+    "blocked_cool": "Grzanie nie jest możliwe: {{name}} chłodzi lub osusza na tej samej jednostce zewnętrznej (grupa {{group}}).",
+    "rule_master": "Decyduje jednostka główna {{name}}.",
+    "rule_first": "Jednostka nadrzędna jest w trybie auto lub tylko wentylator, więc decyduje jednostka już pracująca.",
+    "yield_off_heat": "{{device}} został wyłączony: jednostka główna {{master}} zaczęła grzać (grupa {{group}}), a grzanie nie może działać jednocześnie z chłodzeniem lub osuszaniem na jednej jednostce zewnętrznej.",
+    "yield_off_cool": "{{device}} został wyłączony: jednostka główna {{master}} zaczęła chłodzić lub osuszać (grupa {{group}}), a chłodzenie lub osuszanie nie może działać jednocześnie z grzaniem na jednej jednostce zewnętrznej.",
+    "yield_fan_heat": "{{device}} został przełączony na samą wentylację: jednostka główna {{master}} zaczęła grzać (grupa {{group}}), a grzanie nie może działać jednocześnie z chłodzeniem lub osuszaniem na jednej jednostce zewnętrznej.",
+    "yield_fan_cool": "{{device}} został przełączony na samą wentylację: jednostka główna {{master}} zaczęła chłodzić lub osuszać (grupa {{group}}), a chłodzenie lub osuszanie nie może działać jednocześnie z grzaniem na jednej jednostce zewnętrznej."
+  }
+}

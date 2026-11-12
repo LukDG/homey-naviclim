@@ -1,0 +1,12 @@
+{
+  "group": {
+    "blocked_heat": "Køling og affugtning er ikke muligt: {{name}} varmer på samme udedel (gruppe {{group}}).",
+    "blocked_cool": "Varme er ikke muligt: {{name}} køler eller affugter på samme udedel (gruppe {{group}}).",
+    "rule_master": "Hovedenheden {{name}} bestemmer.",
+    "rule_first": "Masteren står på auto eller kun ventilator, så den enhed, der allerede kører, bestemmer.",
+    "yield_off_heat": "{{device}} blev slukket: hovedenheden {{master}} begyndte at varme (gruppe {{group}}), og varme kan ikke køre samtidig med køling eller affugtning på én udedel.",
+    "yield_off_cool": "{{device}} blev slukket: hovedenheden {{master}} begyndte at køle eller affugte (gruppe {{group}}), og køling eller affugtning kan ikke køre samtidig med varme på én udedel.",
+    "yield_fan_heat": "{{device}} blev sat til kun ventilator: hovedenheden {{master}} begyndte at varme (gruppe {{group}}), og varme kan ikke køre samtidig med køling eller affugtning på én udedel.",
+    "yield_fan_cool": "{{device}} blev sat til kun ventilator: hovedenheden {{master}} begyndte at køle eller affugte (gruppe {{group}}), og køling eller affugtning kan ikke køre samtidig med varme på én udedel."
+  }
+}

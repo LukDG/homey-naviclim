@@ -1,0 +1,12 @@
+{
+  "group": {
+    "blocked_heat": "Koelen en ontvochtigen zijn niet mogelijk: {{name}} verwarmt op dezelfde buitenunit (groep {{group}}).",
+    "blocked_cool": "Verwarmen is niet mogelijk: {{name}} koelt of ontvochtigt op dezelfde buitenunit (groep {{group}}).",
+    "rule_master": "Hoofdunit {{name}} beslist.",
+    "rule_first": "De master staat op auto of alleen ventilator, dus de unit die al draait beslist.",
+    "yield_off_heat": "{{device}} is uitgeschakeld: hoofdunit {{master}} is gaan verwarmen (groep {{group}}) en verwarmen kan op één buitenunit niet samen met koelen of ontvochtigen.",
+    "yield_off_cool": "{{device}} is uitgeschakeld: hoofdunit {{master}} is gaan koelen of ontvochtigen (groep {{group}}) en koelen of ontvochtigen kan op één buitenunit niet samen met verwarmen.",
+    "yield_fan_heat": "{{device}} is op alleen ventilator gezet: hoofdunit {{master}} is gaan verwarmen (groep {{group}}) en verwarmen kan op één buitenunit niet samen met koelen of ontvochtigen.",
+    "yield_fan_cool": "{{device}} is op alleen ventilator gezet: hoofdunit {{master}} is gaan koelen of ontvochtigen (groep {{group}}) en koelen of ontvochtigen kan op één buitenunit niet samen met verwarmen."
+  }
+}

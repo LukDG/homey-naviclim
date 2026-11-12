@@ -1,0 +1,65 @@
+{
+  "id": "set-ac-target-cooling",
+  "title": {
+    "en": "Set cooling target temperature",
+    "nl": "Doeltemperatuur koelen instellen",
+    "de": "Zieltemperatur Kühlen einstellen",
+    "fr": "Définir la consigne de refroidissement",
+    "it": "Imposta la temperatura obiettivo di raffreddamento",
+    "sv": "Ställ in måltemperatur för kyla",
+    "no": "Angi måltemperatur for kjøling",
+    "es": "Establecer temperatura objetivo de frío",
+    "da": "Indstil måltemperatur for køling",
+    "ru": "Задать целевую температуру охлаждения",
+    "pl": "Ustaw temperaturę docelową chłodzenia",
+    "ko": "냉방 목표 온도 설정",
+    "ar": "تعيين درجة الحرارة المستهدفة للتبريد"
+  },
+  "titleFormatted": {
+    "en": "Set cooling target to [[temperature]]",
+    "nl": "Stel doeltemperatuur koelen in op [[temperature]]",
+    "de": "Zieltemperatur Kühlen auf [[temperature]] einstellen",
+    "fr": "Définir la consigne de refroidissement sur [[temperature]]",
+    "it": "Imposta la temperatura obiettivo di raffreddamento su [[temperature]]",
+    "sv": "Ställ in måltemperatur för kyla till [[temperature]]",
+    "no": "Angi måltemperatur for kjøling til [[temperature]]",
+    "es": "Establecer temperatura objetivo de frío en [[temperature]]",
+    "da": "Indstil måltemperatur for køling til [[temperature]]",
+    "ru": "Задать целевую температуру охлаждения [[temperature]]",
+    "pl": "Ustaw temperaturę docelową chłodzenia na [[temperature]]",
+    "ko": "냉방 목표 온도를 [[temperature]](으)로 설정",
+    "ar": "تعيين درجة الحرارة المستهدفة للتبريد إلى [[temperature]]"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=naviclim-ac"
+    },
+    {
+      "type": "number",
+      "name": "temperature",
+      "title": {
+        "en": "Temperature",
+        "nl": "Temperatuur",
+        "de": "Temperatur",
+        "fr": "Température",
+        "it": "Temperatura",
+        "sv": "Temperatur",
+        "no": "Temperatur",
+        "es": "Temperatura",
+        "da": "Temperatur",
+        "ru": "Температура",
+        "pl": "Temperatura",
+        "ko": "온도",
+        "ar": "درجة الحرارة"
+      },
+      "placeholder": {
+        "en": "23"
+      },
+      "min": 18,
+      "max": 30,
+      "step": 0.5
+    }
+  ]
+}

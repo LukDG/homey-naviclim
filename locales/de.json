@@ -1,0 +1,12 @@
+{
+  "group": {
+    "blocked_heat": "Kühlen und Entfeuchten sind nicht möglich: {{name}} heizt am selben Außengerät (Gruppe {{group}}).",
+    "blocked_cool": "Heizen ist nicht möglich: {{name}} kühlt oder entfeuchtet am selben Außengerät (Gruppe {{group}}).",
+    "rule_master": "Hauptgerät {{name}} entscheidet.",
+    "rule_first": "Der Master steht auf Auto oder nur Lüfter, daher entscheidet das bereits laufende Gerät.",
+    "yield_off_heat": "{{device}} wurde ausgeschaltet: Hauptgerät {{master}} hat mit dem Heizen begonnen (Gruppe {{group}}), und Heizen kann an einem Außengerät nicht zusammen mit Kühlen oder Entfeuchten laufen.",
+    "yield_off_cool": "{{device}} wurde ausgeschaltet: Hauptgerät {{master}} hat mit dem Kühlen oder Entfeuchten begonnen (Gruppe {{group}}), und Kühlen oder Entfeuchten kann an einem Außengerät nicht zusammen mit Heizen laufen.",
+    "yield_fan_heat": "{{device}} wurde auf „Nur Lüfter“ gestellt: Hauptgerät {{master}} hat mit dem Heizen begonnen (Gruppe {{group}}), und Heizen kann an einem Außengerät nicht zusammen mit Kühlen oder Entfeuchten laufen.",
+    "yield_fan_cool": "{{device}} wurde auf „Nur Lüfter“ gestellt: Hauptgerät {{master}} hat mit dem Kühlen oder Entfeuchten begonnen (Gruppe {{group}}), und Kühlen oder Entfeuchten kann an einem Außengerät nicht zusammen mit Heizen laufen."
+  }
+}

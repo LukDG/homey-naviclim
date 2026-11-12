@@ -1,0 +1,12 @@
+{
+  "group": {
+    "blocked_heat": "Le refroidissement et la déshumidification sont impossibles : {{name}} chauffe sur la même unité extérieure (groupe {{group}}).",
+    "blocked_cool": "Le chauffage est impossible : {{name}} refroidit ou déshumidifie sur la même unité extérieure (groupe {{group}}).",
+    "rule_master": "Le maître {{name}} décide.",
+    "rule_first": "Le maître est en mode auto ou ventilation seule ; c’est donc l’unité déjà en marche qui décide.",
+    "yield_off_heat": "{{device}} a été éteint : le maître {{master}} a commencé à chauffer (groupe {{group}}), et le chauffage ne peut pas fonctionner en même temps que le refroidissement ou la déshumidification sur une même unité extérieure.",
+    "yield_off_cool": "{{device}} a été éteint : le maître {{master}} a commencé à refroidir ou à déshumidifier (groupe {{group}}), et cela ne peut pas fonctionner en même temps que le chauffage sur une même unité extérieure.",
+    "yield_fan_heat": "{{device}} a été mis en ventilation seule : le maître {{master}} a commencé à chauffer (groupe {{group}}), et le chauffage ne peut pas fonctionner en même temps que le refroidissement ou la déshumidification sur une même unité extérieure.",
+    "yield_fan_cool": "{{device}} a été mis en ventilation seule : le maître {{master}} a commencé à refroidir ou à déshumidifier (groupe {{group}}), et cela ne peut pas fonctionner en même temps que le chauffage sur une même unité extérieure."
+  }
+}

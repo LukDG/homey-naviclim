@@ -1,0 +1,169 @@
+{
+  "id": "set-ac-mode",
+  "title": {
+    "en": "Set mode",
+    "nl": "Modus instellen",
+    "de": "Modus einstellen",
+    "fr": "Définir le mode",
+    "it": "Imposta la modalità",
+    "sv": "Ställ in läge",
+    "no": "Angi modus",
+    "es": "Establecer modo",
+    "da": "Indstil tilstand",
+    "ru": "Задать режим",
+    "pl": "Ustaw tryb",
+    "ko": "모드 설정",
+    "ar": "تعيين الوضع"
+  },
+  "titleFormatted": {
+    "en": "Set mode to [[mode]]",
+    "nl": "Stel modus in op [[mode]]",
+    "de": "Modus auf [[mode]] einstellen",
+    "fr": "Définir le mode sur [[mode]]",
+    "it": "Imposta la modalità su [[mode]]",
+    "sv": "Ställ in läge till [[mode]]",
+    "no": "Angi modus til [[mode]]",
+    "es": "Establecer modo en [[mode]]",
+    "da": "Indstil tilstand til [[mode]]",
+    "ru": "Задать режим [[mode]]",
+    "pl": "Ustaw tryb na [[mode]]",
+    "ko": "모드를 [[mode]](으)로 설정",
+    "ar": "تعيين الوضع إلى [[mode]]"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=naviclim-ac"
+    },
+    {
+      "type": "dropdown",
+      "name": "mode",
+      "title": {
+        "en": "Mode",
+        "nl": "Modus",
+        "de": "Modus",
+        "fr": "Mode",
+        "it": "Modalità",
+        "sv": "Läge",
+        "no": "Modus",
+        "es": "Modo",
+        "da": "Tilstand",
+        "ru": "Режим",
+        "pl": "Tryb",
+        "ko": "모드",
+        "ar": "الوضع"
+      },
+      "values": [
+        {
+          "id": "off",
+          "label": {
+            "en": "Off",
+            "nl": "Uit",
+            "de": "Aus",
+            "fr": "Arrêt",
+            "it": "Spento",
+            "sv": "Av",
+            "no": "Av",
+            "es": "Apagado",
+            "da": "Fra",
+            "ru": "Выкл.",
+            "pl": "Wył.",
+            "ko": "끔",
+            "ar": "إيقاف"
+          }
+        },
+        {
+          "id": "auto",
+          "label": {
+            "en": "Auto",
+            "nl": "Auto",
+            "de": "Auto",
+            "fr": "Auto",
+            "it": "Auto",
+            "sv": "Auto",
+            "no": "Auto",
+            "es": "Auto",
+            "da": "Auto",
+            "ru": "Авто",
+            "pl": "Auto",
+            "ko": "자동",
+            "ar": "تلقائي"
+          }
+        },
+        {
+          "id": "cool",
+          "label": {
+            "en": "Cool",
+            "nl": "Koelen",
+            "de": "Kühlen",
+            "fr": "Froid",
+            "it": "Raffreddamento",
+            "sv": "Kyla",
+            "no": "Kjøling",
+            "es": "Frío",
+            "da": "Køling",
+            "ru": "Охлаждение",
+            "pl": "Chłodzenie",
+            "ko": "냉방",
+            "ar": "تبريد"
+          }
+        },
+        {
+          "id": "heat",
+          "label": {
+            "en": "Heat",
+            "nl": "Verwarmen",
+            "de": "Heizen",
+            "fr": "Chaud",
+            "it": "Riscaldamento",
+            "sv": "Värme",
+            "no": "Varme",
+            "es": "Calor",
+            "da": "Varme",
+            "ru": "Обогрев",
+            "pl": "Grzanie",
+            "ko": "난방",
+            "ar": "تدفئة"
+          }
+        },
+        {
+          "id": "dry",
+          "label": {
+            "en": "Dry",
+            "nl": "Ontvochtigen",
+            "de": "Entfeuchten",
+            "fr": "Déshumidification",
+            "it": "Deumidificazione",
+            "sv": "Avfuktning",
+            "no": "Avfukting",
+            "es": "Deshumidificar",
+            "da": "Affugtning",
+            "ru": "Осушение",
+            "pl": "Osuszanie",
+            "ko": "제습",
+            "ar": "إزالة الرطوبة"
+          }
+        },
+        {
+          "id": "fan_only",
+          "label": {
+            "en": "Fan only",
+            "nl": "Alleen ventilator",
+            "de": "Nur Lüfter",
+            "fr": "Ventilation seule",
+            "it": "Solo ventilazione",
+            "sv": "Endast fläkt",
+            "no": "Kun vifte",
+            "es": "Solo ventilador",
+            "da": "Kun ventilator",
+            "ru": "Только вентилятор",
+            "pl": "Tylko wentylator",
+            "ko": "송풍",
+            "ar": "مروحة فقط"
+          }
+        }
+      ]
+    }
+  ]
+}

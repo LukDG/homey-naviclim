@@ -1,0 +1,12 @@
+{
+  "group": {
+    "blocked_heat": "Kyla och avfuktning är inte möjligt: {{name}} värmer på samma utomhusenhet (grupp {{group}}).",
+    "blocked_cool": "Värme är inte möjligt: {{name}} kyler eller avfuktar på samma utomhusenhet (grupp {{group}}).",
+    "rule_master": "Huvudenheten {{name}} bestämmer.",
+    "rule_first": "Mastern står på auto eller endast fläkt, så den enhet som redan är igång bestämmer.",
+    "yield_off_heat": "{{device}} stängdes av: huvudenheten {{master}} började värma (grupp {{group}}), och värme kan inte köras samtidigt med kyla eller avfuktning på en utomhusenhet.",
+    "yield_off_cool": "{{device}} stängdes av: huvudenheten {{master}} började kyla eller avfukta (grupp {{group}}), och kyla eller avfuktning kan inte köras samtidigt med värme på en utomhusenhet.",
+    "yield_fan_heat": "{{device}} ställdes in på endast fläkt: huvudenheten {{master}} började värma (grupp {{group}}), och värme kan inte köras samtidigt med kyla eller avfuktning på en utomhusenhet.",
+    "yield_fan_cool": "{{device}} ställdes in på endast fläkt: huvudenheten {{master}} började kyla eller avfukta (grupp {{group}}), och kyla eller avfuktning kan inte köras samtidigt med värme på en utomhusenhet."
+  }
+}

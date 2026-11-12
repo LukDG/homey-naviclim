@@ -1,0 +1,35 @@
+{
+  "2026.1110.0": {
+    "en": "First version.",
+    "nl": "Eerste versie.",
+    "de": "Erste Version.",
+    "fr": "Première version.",
+    "it": "Prima versione.",
+    "sv": "Första versionen.",
+    "no": "Første versjon.",
+    "es": "Primera versión.",
+    "da": "Første version.",
+    "ru": "Первая версия.",
+    "pl": "Pierwsza wersja.",
+    "ko": "첫 번째 버전입니다.",
+    "ar": "الإصدار الأول."
+  },
+  "2026.1112.0": {
+    "en": "Improved master/follower functionality.",
+    "nl": "Verbeterde werking van master en volger.",
+    "de": "Verbesserte Master/Folger-Funktion.",
+    "fr": "Fonctionnement maître/suiveur amélioré.",
+    "it": "Funzionalità master/secondaria migliorata.",
+    "sv": "Förbättrad master/följare-funktion.",
+    "no": "Forbedret master/følger-funksjon.",
+    "es": "Funcionamiento maestro/seguidor mejorado.",
+    "da": "Forbedret master/følger-funktion.",
+    "ru": "Улучшена работа ведущего и ведомого блоков.",
+    "pl": "Ulepszone działanie jednostki nadrzędnej i podrzędnej.",
+    "ko": "마스터/팔로워 기능이 개선되었습니다.",
+    "ar": "تحسين وظيفة الوحدة الرئيسية والتابعة."
+  },
+  "2026.1112.1": {
+    "en": "Supports clustering outdoor unit (master/slave)"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Louver position",
+    "nl": "Lamelpositie",
+    "de": "Lamellenposition",
+    "fr": "Position du volet",
+    "it": "Posizione delle alette",
+    "sv": "Lamellposition",
+    "no": "Lamellposisjon",
+    "es": "Posición de las lamas",
+    "da": "Lamelposition",
+    "ru": "Положение жалюзи",
+    "pl": "Pozycja lamel",
+    "ko": "루버 위치",
+    "ar": "موضع الشفرات"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    {
+      "id": "quarter_open",
+      "title": {
+        "en": "Quarter open",
+        "nl": "Kwart open",
+        "de": "Viertel offen",
+        "fr": "Ouvert au quart",
+        "it": "Aperto un quarto",
+        "sv": "Fjärdedels öppen",
+        "no": "Kvart åpen",
+        "es": "Un cuarto abierto",
+        "da": "Kvart åben",
+        "ru": "Открыто на четверть",
+        "pl": "Otwarte w ćwierci",
+        "ko": "1/4 열림",
+        "ar": "ربع مفتوح"
+      }
+    },
+    {
+      "id": "half_open",
+      "title": {
+        "en": "Half open",
+        "nl": "Half open",
+        "de": "Halb offen",
+        "fr": "Ouvert à moitié",
+        "it": "Aperto a metà",
+        "sv": "Halvöppen",
+        "no": "Halvåpen",
+        "es": "Medio abierto",
+        "da": "Halvåben",
+        "ru": "Открыто наполовину",
+        "pl": "Otwarte do połowy",
+        "ko": "1/2 열림",
+        "ar": "نصف مفتوح"
+      }
+    },
+    {
+      "id": "three_quarters_open",
+      "title": {
+        "en": "Three-quarters open",
+        "nl": "Driekwart open",
+        "de": "Dreiviertel offen",
+        "fr": "Ouvert aux trois quarts",
+        "it": "Aperto tre quarti",
+        "sv": "Tre fjärdedelar öppen",
+        "no": "Tre kvart åpen",
+        "es": "Tres cuartos abierto",
+        "da": "Tre kvart åben",
+        "ru": "Открыто на три четверти",
+        "pl": "Otwarte w trzech czwartych",
+        "ko": "3/4 열림",
+        "ar": "ثلاثة أرباع مفتوح"
+      }
+    },
+    {
+      "id": "fully_open",
+      "title": {
+        "en": "Fully open",
+        "nl": "Volledig open",
+        "de": "Ganz offen",
+        "fr": "Complètement ouvert",
+        "it": "Completamente aperto",
+        "sv": "Helt öppen",
+        "no": "Helt åpen",
+        "es": "Totalmente abierto",
+        "da": "Helt åben",
+        "ru": "Полностью открыто",
+        "pl": "Całkowicie otwarte",
+        "ko": "완전 열림",
+        "ar": "مفتوح بالكامل"
+      }
+    }
+  ]
+}

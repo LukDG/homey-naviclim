@@ -1,0 +1,12 @@
+{
+  "group": {
+    "blocked_heat": "Kjøling og avfukting er ikke mulig: {{name}} varmer på samme utedel (gruppe {{group}}).",
+    "blocked_cool": "Varme er ikke mulig: {{name}} kjøler eller avfukter på samme utedel (gruppe {{group}}).",
+    "rule_master": "Hovedenheten {{name}} bestemmer.",
+    "rule_first": "Masteren står på auto eller kun vifte, så enheten som allerede går bestemmer.",
+    "yield_off_heat": "{{device}} ble slått av: hovedenheten {{master}} begynte å varme (gruppe {{group}}), og varme kan ikke gå samtidig med kjøling eller avfukting på én utedel.",
+    "yield_off_cool": "{{device}} ble slått av: hovedenheten {{master}} begynte å kjøle eller avfukte (gruppe {{group}}), og kjøling eller avfukting kan ikke gå samtidig med varme på én utedel.",
+    "yield_fan_heat": "{{device}} ble satt til kun vifte: hovedenheten {{master}} begynte å varme (gruppe {{group}}), og varme kan ikke gå samtidig med kjøling eller avfukting på én utedel.",
+    "yield_fan_cool": "{{device}} ble satt til kun vifte: hovedenheten {{master}} begynte å kjøle eller avfukte (gruppe {{group}}), og kjøling eller avfukting kan ikke gå samtidig med varme på én utedel."
+  }
+}

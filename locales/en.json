@@ -1,0 +1,12 @@
+{
+  "group": {
+    "blocked_heat": "Cooling and drying are not possible: {{name}} is heating on the same outdoor unit (group {{group}}).",
+    "blocked_cool": "Heating is not possible: {{name}} is cooling or drying on the same outdoor unit (group {{group}}).",
+    "rule_master": "Master {{name}} decides.",
+    "rule_first": "The master is in auto or fan-only mode, so the unit that is already running decides.",
+    "yield_off_heat": "{{device}} was switched off: master {{master}} started heating (group {{group}}) and heating cannot run together with cooling or drying on one outdoor unit.",
+    "yield_off_cool": "{{device}} was switched off: master {{master}} started cooling or drying (group {{group}}) and cooling or drying cannot run together with heating on one outdoor unit.",
+    "yield_fan_heat": "{{device}} was set to fan only: master {{master}} started heating (group {{group}}) and heating cannot run together with cooling or drying on one outdoor unit.",
+    "yield_fan_cool": "{{device}} was set to fan only: master {{master}} started cooling or drying (group {{group}}) and cooling or drying cannot run together with heating on one outdoor unit."
+  }
+}

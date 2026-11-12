@@ -1,0 +1,12 @@
+{
+  "group": {
+    "blocked_heat": "El frío y la deshumidificación no son posibles: {{name}} está calentando en la misma unidad exterior (grupo {{group}}).",
+    "blocked_cool": "El calor no es posible: {{name}} está enfriando o deshumidificando en la misma unidad exterior (grupo {{group}}).",
+    "rule_master": "Decide la unidad principal {{name}}.",
+    "rule_first": "El maestro está en auto o solo ventilador, así que decide la unidad que ya está en marcha.",
+    "yield_off_heat": "{{device}} se ha apagado: la unidad principal {{master}} ha empezado a calentar (grupo {{group}}), y el calor no puede funcionar a la vez que el frío o la deshumidificación en una misma unidad exterior.",
+    "yield_off_cool": "{{device}} se ha apagado: la unidad principal {{master}} ha empezado a enfriar o deshumidificar (grupo {{group}}), y el frío o la deshumidificación no pueden funcionar a la vez que el calor en una misma unidad exterior.",
+    "yield_fan_heat": "{{device}} se ha puesto en solo ventilador: la unidad principal {{master}} ha empezado a calentar (grupo {{group}}), y el calor no puede funcionar a la vez que el frío o la deshumidificación en una misma unidad exterior.",
+    "yield_fan_cool": "{{device}} se ha puesto en solo ventilador: la unidad principal {{master}} ha empezado a enfriar o deshumidificar (grupo {{group}}), y el frío o la deshumidificación no pueden funcionar a la vez que el calor en una misma unidad exterior."
+  }
+}

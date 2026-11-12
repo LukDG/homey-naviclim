@@ -1,0 +1,12 @@
+{
+  "group": {
+    "blocked_heat": "Raffreddamento e deumidificazione non sono possibili: {{name}} sta riscaldando sulla stessa unità esterna (gruppo {{group}}).",
+    "blocked_cool": "Il riscaldamento non è possibile: {{name}} sta raffreddando o deumidificando sulla stessa unità esterna (gruppo {{group}}).",
+    "rule_master": "Decide l’unità principale {{name}}.",
+    "rule_first": "Il master è in auto o solo ventilazione, quindi decide l’unità già in funzione.",
+    "yield_off_heat": "{{device}} è stato spento: l’unità principale {{master}} ha iniziato a riscaldare (gruppo {{group}}) e il riscaldamento non può funzionare insieme a raffreddamento o deumidificazione su un’unica unità esterna.",
+    "yield_off_cool": "{{device}} è stato spento: l’unità principale {{master}} ha iniziato a raffreddare o deumidificare (gruppo {{group}}) e raffreddamento o deumidificazione non possono funzionare insieme al riscaldamento su un’unica unità esterna.",
+    "yield_fan_heat": "{{device}} è stato impostato su solo ventilazione: l’unità principale {{master}} ha iniziato a riscaldare (gruppo {{group}}) e il riscaldamento non può funzionare insieme a raffreddamento o deumidificazione su un’unica unità esterna.",
+    "yield_fan_cool": "{{device}} è stato impostato su solo ventilazione: l’unità principale {{master}} ha iniziato a raffreddare o deumidificare (gruppo {{group}}) e raffreddamento o deumidificazione non possono funzionare insieme al riscaldamento su un’unica unità esterna."
+  }
+}

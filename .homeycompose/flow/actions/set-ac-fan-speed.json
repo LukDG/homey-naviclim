@@ -1,0 +1,151 @@
+{
+  "id": "set-ac-fan-speed",
+  "title": {
+    "en": "Set fan speed",
+    "nl": "Ventilatorsnelheid instellen",
+    "de": "Lüfterstufe einstellen",
+    "fr": "Définir la vitesse du ventilateur",
+    "it": "Imposta la velocità della ventola",
+    "sv": "Ställ in fläkthastighet",
+    "no": "Angi viftehastighet",
+    "es": "Establecer velocidad del ventilador",
+    "da": "Indstil ventilatorhastighed",
+    "ru": "Задать скорость вентилятора",
+    "pl": "Ustaw prędkość wentylatora",
+    "ko": "풍량 설정",
+    "ar": "تعيين سرعة المروحة"
+  },
+  "titleFormatted": {
+    "en": "Set fan speed to [[speed]]",
+    "nl": "Stel ventilatorsnelheid in op [[speed]]",
+    "de": "Lüfterstufe auf [[speed]] einstellen",
+    "fr": "Définir la vitesse du ventilateur sur [[speed]]",
+    "it": "Imposta la velocità della ventola su [[speed]]",
+    "sv": "Ställ in fläkthastighet till [[speed]]",
+    "no": "Angi viftehastighet til [[speed]]",
+    "es": "Establecer velocidad del ventilador en [[speed]]",
+    "da": "Indstil ventilatorhastighed til [[speed]]",
+    "ru": "Задать скорость вентилятора [[speed]]",
+    "pl": "Ustaw prędkość wentylatora na [[speed]]",
+    "ko": "풍량을 [[speed]](으)로 설정",
+    "ar": "تعيين سرعة المروحة إلى [[speed]]"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=naviclim-ac"
+    },
+    {
+      "type": "dropdown",
+      "name": "speed",
+      "title": {
+        "en": "Fan speed",
+        "nl": "Ventilatorsnelheid",
+        "de": "Lüfterstufe",
+        "fr": "Vitesse du ventilateur",
+        "it": "Velocità ventola",
+        "sv": "Fläkthastighet",
+        "no": "Viftehastighet",
+        "es": "Velocidad del ventilador",
+        "da": "Ventilatorhastighed",
+        "ru": "Скорость вентилятора",
+        "pl": "Prędkość wentylatora",
+        "ko": "풍량",
+        "ar": "سرعة المروحة"
+      },
+      "values": [
+        {
+          "id": "auto",
+          "label": {
+            "en": "Auto",
+            "nl": "Auto",
+            "de": "Auto",
+            "fr": "Auto",
+            "it": "Auto",
+            "sv": "Auto",
+            "no": "Auto",
+            "es": "Auto",
+            "da": "Auto",
+            "ru": "Авто",
+            "pl": "Auto",
+            "ko": "자동",
+            "ar": "تلقائي"
+          }
+        },
+        {
+          "id": "1",
+          "label": {
+            "en": "1 (quiet)",
+            "nl": "1 (stil)",
+            "de": "1 (leise)",
+            "fr": "1 (silencieux)",
+            "it": "1 (silenzioso)",
+            "sv": "1 (tyst)",
+            "no": "1 (stille)",
+            "es": "1 (silencioso)",
+            "da": "1 (lydløs)",
+            "ru": "1 (тихий)",
+            "pl": "1 (cichy)",
+            "ko": "1 (저소음)",
+            "ar": "1 (هادئ)"
+          }
+        },
+        {
+          "id": "2",
+          "label": {
+            "en": "2",
+            "nl": "2",
+            "de": "2",
+            "fr": "2",
+            "it": "2",
+            "sv": "2",
+            "no": "2",
+            "es": "2",
+            "da": "2",
+            "ru": "2",
+            "pl": "2",
+            "ko": "2",
+            "ar": "2"
+          }
+        },
+        {
+          "id": "3",
+          "label": {
+            "en": "3",
+            "nl": "3",
+            "de": "3",
+            "fr": "3",
+            "it": "3",
+            "sv": "3",
+            "no": "3",
+            "es": "3",
+            "da": "3",
+            "ru": "3",
+            "pl": "3",
+            "ko": "3",
+            "ar": "3"
+          }
+        },
+        {
+          "id": "4",
+          "label": {
+            "en": "4",
+            "nl": "4",
+            "de": "4",
+            "fr": "4",
+            "it": "4",
+            "sv": "4",
+            "no": "4",
+            "es": "4",
+            "da": "4",
+            "ru": "4",
+            "pl": "4",
+            "ko": "4",
+            "ar": "4"
+          }
+        }
+      ]
+    }
+  ]
+}

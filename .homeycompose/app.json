@@ -1,0 +1,153 @@
+{
+  "id": "be.lukdg.naviclim",
+  "version": "2026.1112.1",
+  "compatibility": ">=12.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Naviclim",
+    "nl": "Naviclim",
+    "de": "Naviclim",
+    "fr": "Naviclim",
+    "it": "Naviclim",
+    "sv": "Naviclim",
+    "no": "Naviclim",
+    "es": "Naviclim",
+    "da": "Naviclim",
+    "ru": "Naviclim",
+    "pl": "Naviclim",
+    "ko": "Naviclim",
+    "ar": "Naviclim"
+  },
+  "description": {
+    "en": "Local control for Atlantic and Fujitsu General air conditioners",
+    "nl": "Lokale bediening voor Atlantic- en Fujitsu General-airco’s",
+    "de": "Lokale Steuerung für Klimaanlagen von Atlantic und Fujitsu General",
+    "fr": "Contrôle local des climatiseurs Atlantic et Fujitsu General",
+    "it": "Controllo locale per condizionatori Atlantic e Fujitsu General",
+    "sv": "Lokal styrning av luftkonditionering från Atlantic och Fujitsu General",
+    "no": "Lokal styring av klimaanlegg fra Atlantic og Fujitsu General",
+    "es": "Control local para aires acondicionados Atlantic y Fujitsu General",
+    "da": "Lokal styring af aircondition fra Atlantic og Fujitsu General",
+    "ru": "Локальное управление кондиционерами Atlantic и Fujitsu General",
+    "pl": "Lokalne sterowanie klimatyzatorami Atlantic i Fujitsu General",
+    "ko": "Atlantic 및 Fujitsu General 에어컨을 로컬로 제어",
+    "ar": "تحكم محلي في مكيفات Atlantic وFujitsu General"
+  },
+  "category": [
+    "climate"
+  ],
+  "permissions": [],
+  "brandColor": "#0A6EBD",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Luk De Groote",
+    "email": "luk@lukdg.be"
+  },
+  "api": {
+    "getStatus": {
+      "method": "GET",
+      "path": "/status"
+    }
+  },
+  "tags": {
+    "en": [
+      "air conditioning",
+      "climate",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "nl": [
+      "airco",
+      "klimaat",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "de": [
+      "Klimaanlage",
+      "Klima",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "fr": [
+      "climatisation",
+      "climat",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "it": [
+      "condizionatore",
+      "clima",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "sv": [
+      "luftkonditionering",
+      "klimat",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "no": [
+      "klimaanlegg",
+      "klima",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "es": [
+      "aire acondicionado",
+      "clima",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "da": [
+      "aircondition",
+      "klima",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "ru": [
+      "кондиционер",
+      "климат",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "pl": [
+      "klimatyzacja",
+      "klimat",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "ko": [
+      "에어컨",
+      "기후",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ],
+    "ar": [
+      "مكيف",
+      "مناخ",
+      "zigbee",
+      "Fujitsu",
+      "Atlantic"
+    ]
+  },
+  "support": "https://github.com/LukDG"
+}

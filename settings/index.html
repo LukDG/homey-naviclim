@@ -1,0 +1,1023 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+  <style>
+    :root {
+      --bg: transparent; --card: #f4f5f7; --text: #1b1f24; --muted: #6a7480;
+      --line: #dfe3e8; --ok: #1e9e57; --off: #8a94a0; --bad: #d64545; --accent: #0a6ebd;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --card: #23272d; --text: #eceff3; --muted: #9aa5b1; --line: #343a42; --accent: #4da3ee; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 12px; font-family: -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--text); background: var(--bg); }
+    h1 { font-size: 1.25rem; margin: 0 0 4px; }
+    .sub { color: var(--muted); font-size: .85rem; margin-bottom: 12px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .chip { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: .85rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+    .card h2 { font-size: 1rem; margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ok); flex: none; }
+    .dot.off { background: var(--off); } .dot.bad { background: var(--bad); }
+    .row { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-top: 1px solid var(--line); font-size: .9rem; }
+    .row:first-of-type { border-top: 0; }
+    .row .k { color: var(--muted); } .row .v { text-align: end; font-weight: 600; }
+    .note { color: var(--muted); font-size: .75rem; font-weight: 400; display: block; }
+    .empty, .err { padding: 16px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+    .err { border-color: var(--bad); }
+    button { font: inherit; border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 8px; padding: 4px 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1 id="title"></h1>
+  <div class="sub"><span id="updated"></span> <button id="refresh"></button></div>
+  <div class="chips" id="chips"></div>
+  <div id="content"></div>
+
+<script>
+const TEXT = {
+  "en": {
+    "title": "Naviclim AC – status",
+    "refresh": "Refresh",
+    "updated": "Last updated",
+    "never": "never",
+    "devices": "devices",
+    "online": "online",
+    "on": "on",
+    "offline": "offline",
+    "none": "No Naviclim AC devices yet. Add one via Devices → Add device → Naviclim AC.",
+    "error": "Could not load the status",
+    "power": "Power",
+    "mode": "Mode",
+    "fan": "Fan speed",
+    "louver": "Louver position",
+    "cooling": "Cooling target",
+    "heating": "Heating target",
+    "temp": "Current temperature",
+    "seen": "Last report",
+    "onMode": "Mode when switched on",
+    "lastMode": "Last active mode",
+    "ieee": "Zigbee address",
+    "powerOn": "On",
+    "powerOff": "Off",
+    "agoFmt": "{n} {u} ago",
+    "s": "s",
+    "m": "min",
+    "h": "h",
+    "louverNote": "last set by Homey (cannot be read from the module)",
+    "fanNote": "level 1 (quiet) is remembered by Homey; the module reports it as 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Off",
+      "auto": "Auto",
+      "cool": "Cool",
+      "heat": "Heat",
+      "dry": "Dry",
+      "fan_only": "Fan only"
+    },
+    "onModes": {
+      "last": "Last used mode",
+      "auto": "Auto",
+      "cool": "Cool",
+      "heat": "Heat",
+      "fan_only": "Fan only"
+    },
+    "fans": {
+      "auto": "Auto",
+      "1": "1 (quiet)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Quarter open",
+      "half_open": "Half open",
+      "three_quarters_open": "Three-quarters open",
+      "fully_open": "Fully open"
+    },
+    "group": "Outdoor unit group",
+    "role": "Role in the group",
+    "roles": {
+      "master": "Master",
+      "follower": "Follower",
+      "unknown": "Unknown"
+    }
+  },
+  "nl": {
+    "title": "Naviclim airco – status",
+    "refresh": "Vernieuwen",
+    "updated": "Laatst bijgewerkt",
+    "never": "nooit",
+    "devices": "apparaten",
+    "online": "online",
+    "on": "aan",
+    "offline": "offline",
+    "none": "Nog geen Naviclim-airco’s. Voeg er een toe via Apparaten → Apparaat toevoegen → Naviclim airco.",
+    "error": "Status kon niet worden geladen",
+    "power": "Aan/uit",
+    "mode": "Modus",
+    "fan": "Ventilatorsnelheid",
+    "louver": "Lamelpositie",
+    "cooling": "Doeltemperatuur koelen",
+    "heating": "Doeltemperatuur verwarmen",
+    "temp": "Huidige temperatuur",
+    "seen": "Laatste melding",
+    "onMode": "Modus bij inschakelen",
+    "lastMode": "Laatst actieve modus",
+    "ieee": "Zigbee-adres",
+    "powerOn": "Aan",
+    "powerOff": "Uit",
+    "agoFmt": "{n} {u} geleden",
+    "s": "s",
+    "m": "min",
+    "h": "u",
+    "louverNote": "laatst ingesteld door Homey (niet uitleesbaar uit de module)",
+    "fanNote": "stand 1 (stil) onthoudt Homey zelf; de module meldt dit als 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Uit",
+      "auto": "Auto",
+      "cool": "Koelen",
+      "heat": "Verwarmen",
+      "dry": "Ontvochtigen",
+      "fan_only": "Alleen ventilator"
+    },
+    "onModes": {
+      "last": "Laatst gebruikte modus",
+      "auto": "Auto",
+      "cool": "Koelen",
+      "heat": "Verwarmen",
+      "fan_only": "Alleen ventilator"
+    },
+    "fans": {
+      "auto": "Auto",
+      "1": "1 (stil)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Kwart open",
+      "half_open": "Half open",
+      "three_quarters_open": "Driekwart open",
+      "fully_open": "Volledig open"
+    },
+    "group": "Buitenunit-groep",
+    "role": "Rol in de groep",
+    "roles": {
+      "master": "Master",
+      "follower": "Volger",
+      "unknown": "Onbekend"
+    }
+  },
+  "de": {
+    "title": "Naviclim Klimaanlage – Status",
+    "refresh": "Aktualisieren",
+    "updated": "Zuletzt aktualisiert",
+    "never": "nie",
+    "devices": "Geräte",
+    "online": "online",
+    "on": "ein",
+    "offline": "offline",
+    "none": "Noch keine Naviclim-Klimaanlagen. Füge eine über Geräte → Gerät hinzufügen → Naviclim hinzu.",
+    "error": "Status konnte nicht geladen werden",
+    "power": "Ein/Aus",
+    "mode": "Modus",
+    "fan": "Lüfterstufe",
+    "louver": "Lamellenposition",
+    "cooling": "Zieltemperatur Kühlen",
+    "heating": "Zieltemperatur Heizen",
+    "temp": "Aktuelle Temperatur",
+    "seen": "Letzte Meldung",
+    "onMode": "Modus beim Einschalten",
+    "lastMode": "Zuletzt aktiver Modus",
+    "ieee": "Zigbee-Adresse",
+    "powerOn": "Ein",
+    "powerOff": "Aus",
+    "agoFmt": "vor {n} {u}",
+    "s": "s",
+    "m": "Min.",
+    "h": "Std.",
+    "louverNote": "zuletzt von Homey gesetzt (vom Modul nicht auslesbar)",
+    "fanNote": "Stufe 1 (leise) merkt sich Homey selbst; das Modul meldet sie als 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Aus",
+      "auto": "Auto",
+      "cool": "Kühlen",
+      "heat": "Heizen",
+      "dry": "Entfeuchten",
+      "fan_only": "Nur Lüfter"
+    },
+    "onModes": {
+      "last": "Zuletzt verwendeter Modus",
+      "auto": "Auto",
+      "cool": "Kühlen",
+      "heat": "Heizen",
+      "fan_only": "Nur Lüfter"
+    },
+    "fans": {
+      "auto": "Auto",
+      "1": "1 (leise)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Viertel offen",
+      "half_open": "Halb offen",
+      "three_quarters_open": "Dreiviertel offen",
+      "fully_open": "Ganz offen"
+    },
+    "group": "Außengeräte-Gruppe",
+    "role": "Rolle in der Gruppe",
+    "roles": {
+      "master": "Master",
+      "follower": "Folger",
+      "unknown": "Unbekannt"
+    }
+  },
+  "fr": {
+    "title": "Climatiseur Naviclim – état",
+    "refresh": "Actualiser",
+    "updated": "Dernière mise à jour",
+    "never": "jamais",
+    "devices": "appareils",
+    "online": "en ligne",
+    "on": "allumés",
+    "offline": "hors ligne",
+    "none": "Aucun climatiseur Naviclim pour l’instant. Ajoutez-en un via Appareils → Ajouter un appareil → Naviclim.",
+    "error": "Impossible de charger l’état",
+    "power": "Marche/arrêt",
+    "mode": "Mode",
+    "fan": "Vitesse du ventilateur",
+    "louver": "Position du volet",
+    "cooling": "Consigne de refroidissement",
+    "heating": "Consigne de chauffage",
+    "temp": "Température actuelle",
+    "seen": "Dernier message",
+    "onMode": "Mode à l’allumage",
+    "lastMode": "Dernier mode actif",
+    "ieee": "Adresse Zigbee",
+    "powerOn": "Allumé",
+    "powerOff": "Éteint",
+    "agoFmt": "il y a {n} {u}",
+    "s": "s",
+    "m": "min",
+    "h": "h",
+    "louverNote": "dernière valeur définie par Homey (illisible depuis le module)",
+    "fanNote": "Homey mémorise le niveau 1 (silencieux) ; le module le signale comme 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Arrêt",
+      "auto": "Auto",
+      "cool": "Froid",
+      "heat": "Chaud",
+      "dry": "Déshumidification",
+      "fan_only": "Ventilation seule"
+    },
+    "onModes": {
+      "last": "Dernier mode utilisé",
+      "auto": "Auto",
+      "cool": "Froid",
+      "heat": "Chaud",
+      "fan_only": "Ventilation seule"
+    },
+    "fans": {
+      "auto": "Auto",
+      "1": "1 (silencieux)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Ouvert au quart",
+      "half_open": "Ouvert à moitié",
+      "three_quarters_open": "Ouvert aux trois quarts",
+      "fully_open": "Complètement ouvert"
+    },
+    "group": "Groupe d’unité extérieure",
+    "role": "Rôle dans le groupe",
+    "roles": {
+      "master": "Maître",
+      "follower": "Suiveur",
+      "unknown": "Inconnu"
+    }
+  },
+  "it": {
+    "title": "Condizionatore Naviclim – stato",
+    "refresh": "Aggiorna",
+    "updated": "Ultimo aggiornamento",
+    "never": "mai",
+    "devices": "dispositivi",
+    "online": "online",
+    "on": "accesi",
+    "offline": "offline",
+    "none": "Ancora nessun condizionatore Naviclim. Aggiungine uno da Dispositivi → Aggiungi dispositivo → Naviclim.",
+    "error": "Impossibile caricare lo stato",
+    "power": "Accensione",
+    "mode": "Modalità",
+    "fan": "Velocità ventola",
+    "louver": "Posizione delle alette",
+    "cooling": "Temperatura obiettivo raffreddamento",
+    "heating": "Temperatura obiettivo riscaldamento",
+    "temp": "Temperatura attuale",
+    "seen": "Ultimo messaggio",
+    "onMode": "Modalità all’accensione",
+    "lastMode": "Ultima modalità attiva",
+    "ieee": "Indirizzo Zigbee",
+    "powerOn": "Acceso",
+    "powerOff": "Spento",
+    "agoFmt": "{n} {u} fa",
+    "s": "s",
+    "m": "min",
+    "h": "h",
+    "louverNote": "ultimo valore impostato da Homey (non leggibile dal modulo)",
+    "fanNote": "il livello 1 (silenzioso) è memorizzato da Homey; il modulo lo segnala come 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Spento",
+      "auto": "Auto",
+      "cool": "Raffreddamento",
+      "heat": "Riscaldamento",
+      "dry": "Deumidificazione",
+      "fan_only": "Solo ventilazione"
+    },
+    "onModes": {
+      "last": "Ultima modalità usata",
+      "auto": "Auto",
+      "cool": "Raffreddamento",
+      "heat": "Riscaldamento",
+      "fan_only": "Solo ventilazione"
+    },
+    "fans": {
+      "auto": "Auto",
+      "1": "1 (silenzioso)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Aperto un quarto",
+      "half_open": "Aperto a metà",
+      "three_quarters_open": "Aperto tre quarti",
+      "fully_open": "Completamente aperto"
+    },
+    "group": "Gruppo unità esterna",
+    "role": "Ruolo nel gruppo",
+    "roles": {
+      "master": "Master",
+      "follower": "Secondaria",
+      "unknown": "Sconosciuto"
+    }
+  },
+  "sv": {
+    "title": "Naviclim luftkonditionering – status",
+    "refresh": "Uppdatera",
+    "updated": "Senast uppdaterad",
+    "never": "aldrig",
+    "devices": "enheter",
+    "online": "online",
+    "on": "på",
+    "offline": "offline",
+    "none": "Inga Naviclim-luftkonditioneringar än. Lägg till en via Enheter → Lägg till enhet → Naviclim.",
+    "error": "Det gick inte att läsa in status",
+    "power": "På/av",
+    "mode": "Läge",
+    "fan": "Fläkthastighet",
+    "louver": "Lamellposition",
+    "cooling": "Måltemperatur kyla",
+    "heating": "Måltemperatur värme",
+    "temp": "Aktuell temperatur",
+    "seen": "Senaste rapport",
+    "onMode": "Läge vid påslagning",
+    "lastMode": "Senast aktiva läge",
+    "ieee": "Zigbee-adress",
+    "powerOn": "På",
+    "powerOff": "Av",
+    "agoFmt": "för {n} {u} sedan",
+    "s": "s",
+    "m": "min",
+    "h": "tim",
+    "louverNote": "senast inställt av Homey (kan inte läsas från modulen)",
+    "fanNote": "Homey kommer ihåg nivå 1 (tyst); modulen rapporterar den som 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Av",
+      "auto": "Auto",
+      "cool": "Kyla",
+      "heat": "Värme",
+      "dry": "Avfuktning",
+      "fan_only": "Endast fläkt"
+    },
+    "onModes": {
+      "last": "Senast använda läge",
+      "auto": "Auto",
+      "cool": "Kyla",
+      "heat": "Värme",
+      "fan_only": "Endast fläkt"
+    },
+    "fans": {
+      "auto": "Auto",
+      "1": "1 (tyst)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Fjärdedels öppen",
+      "half_open": "Halvöppen",
+      "three_quarters_open": "Tre fjärdedelar öppen",
+      "fully_open": "Helt öppen"
+    },
+    "group": "Utomhusenhetsgrupp",
+    "role": "Roll i gruppen",
+    "roles": {
+      "master": "Master",
+      "follower": "Följare",
+      "unknown": "Okänd"
+    }
+  },
+  "no": {
+    "title": "Naviclim klimaanlegg – status",
+    "refresh": "Oppdater",
+    "updated": "Sist oppdatert",
+    "never": "aldri",
+    "devices": "enheter",
+    "online": "online",
+    "on": "på",
+    "offline": "offline",
+    "none": "Ingen Naviclim-klimaanlegg ennå. Legg til ett via Enheter → Legg til enhet → Naviclim.",
+    "error": "Kunne ikke laste status",
+    "power": "På/av",
+    "mode": "Modus",
+    "fan": "Viftehastighet",
+    "louver": "Lamellposisjon",
+    "cooling": "Måltemperatur kjøling",
+    "heating": "Måltemperatur varme",
+    "temp": "Gjeldende temperatur",
+    "seen": "Siste melding",
+    "onMode": "Modus ved innkobling",
+    "lastMode": "Sist aktive modus",
+    "ieee": "Zigbee-adresse",
+    "powerOn": "På",
+    "powerOff": "Av",
+    "agoFmt": "for {n} {u} siden",
+    "s": "s",
+    "m": "min",
+    "h": "t",
+    "louverNote": "sist satt av Homey (kan ikke leses fra modulen)",
+    "fanNote": "Homey husker nivå 1 (stille); modulen melder det som 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Av",
+      "auto": "Auto",
+      "cool": "Kjøling",
+      "heat": "Varme",
+      "dry": "Avfukting",
+      "fan_only": "Kun vifte"
+    },
+    "onModes": {
+      "last": "Sist brukte modus",
+      "auto": "Auto",
+      "cool": "Kjøling",
+      "heat": "Varme",
+      "fan_only": "Kun vifte"
+    },
+    "fans": {
+      "auto": "Auto",
+      "1": "1 (stille)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Kvart åpen",
+      "half_open": "Halvåpen",
+      "three_quarters_open": "Tre kvart åpen",
+      "fully_open": "Helt åpen"
+    },
+    "group": "Utedelgruppe",
+    "role": "Rolle i gruppen",
+    "roles": {
+      "master": "Master",
+      "follower": "Følger",
+      "unknown": "Ukjent"
+    }
+  },
+  "es": {
+    "title": "Aire acondicionado Naviclim – estado",
+    "refresh": "Actualizar",
+    "updated": "Última actualización",
+    "never": "nunca",
+    "devices": "dispositivos",
+    "online": "en línea",
+    "on": "encendidos",
+    "offline": "sin conexión",
+    "none": "Aún no hay aires acondicionados Naviclim. Añade uno desde Dispositivos → Añadir dispositivo → Naviclim.",
+    "error": "No se pudo cargar el estado",
+    "power": "Encendido",
+    "mode": "Modo",
+    "fan": "Velocidad del ventilador",
+    "louver": "Posición de las lamas",
+    "cooling": "Temperatura objetivo de frío",
+    "heating": "Temperatura objetivo de calor",
+    "temp": "Temperatura actual",
+    "seen": "Último informe",
+    "onMode": "Modo al encender",
+    "lastMode": "Último modo activo",
+    "ieee": "Dirección Zigbee",
+    "powerOn": "Encendido",
+    "powerOff": "Apagado",
+    "agoFmt": "hace {n} {u}",
+    "s": "s",
+    "m": "min",
+    "h": "h",
+    "louverNote": "último valor establecido por Homey (el módulo no lo puede informar)",
+    "fanNote": "Homey recuerda el nivel 1 (silencioso); el módulo lo informa como 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Apagado",
+      "auto": "Auto",
+      "cool": "Frío",
+      "heat": "Calor",
+      "dry": "Deshumidificar",
+      "fan_only": "Solo ventilador"
+    },
+    "onModes": {
+      "last": "Último modo usado",
+      "auto": "Auto",
+      "cool": "Frío",
+      "heat": "Calor",
+      "fan_only": "Solo ventilador"
+    },
+    "fans": {
+      "auto": "Auto",
+      "1": "1 (silencioso)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Un cuarto abierto",
+      "half_open": "Medio abierto",
+      "three_quarters_open": "Tres cuartos abierto",
+      "fully_open": "Totalmente abierto"
+    },
+    "group": "Grupo de unidad exterior",
+    "role": "Función en el grupo",
+    "roles": {
+      "master": "Maestro",
+      "follower": "Seguidor",
+      "unknown": "Desconocida"
+    }
+  },
+  "da": {
+    "title": "Naviclim aircondition – status",
+    "refresh": "Opdater",
+    "updated": "Senest opdateret",
+    "never": "aldrig",
+    "devices": "enheder",
+    "online": "online",
+    "on": "tændt",
+    "offline": "offline",
+    "none": "Ingen Naviclim-airconditionanlæg endnu. Tilføj et via Enheder → Tilføj enhed → Naviclim.",
+    "error": "Status kunne ikke indlæses",
+    "power": "Tænd/sluk",
+    "mode": "Tilstand",
+    "fan": "Ventilatorhastighed",
+    "louver": "Lamelposition",
+    "cooling": "Måltemperatur køling",
+    "heating": "Måltemperatur varme",
+    "temp": "Aktuel temperatur",
+    "seen": "Seneste melding",
+    "onMode": "Tilstand ved tænding",
+    "lastMode": "Senest aktive tilstand",
+    "ieee": "Zigbee-adresse",
+    "powerOn": "Tændt",
+    "powerOff": "Slukket",
+    "agoFmt": "for {n} {u} siden",
+    "s": "s",
+    "m": "min",
+    "h": "t",
+    "louverNote": "sidst indstillet af Homey (kan ikke læses fra modulet)",
+    "fanNote": "Homey husker niveau 1 (lydløs); modulet melder det som 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Fra",
+      "auto": "Auto",
+      "cool": "Køling",
+      "heat": "Varme",
+      "dry": "Affugtning",
+      "fan_only": "Kun ventilator"
+    },
+    "onModes": {
+      "last": "Senest brugte tilstand",
+      "auto": "Auto",
+      "cool": "Køling",
+      "heat": "Varme",
+      "fan_only": "Kun ventilator"
+    },
+    "fans": {
+      "auto": "Auto",
+      "1": "1 (lydløs)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Kvart åben",
+      "half_open": "Halvåben",
+      "three_quarters_open": "Tre kvart åben",
+      "fully_open": "Helt åben"
+    },
+    "group": "Udendørsenhedsgruppe",
+    "role": "Rolle i gruppen",
+    "roles": {
+      "master": "Master",
+      "follower": "Følger",
+      "unknown": "Ukendt"
+    }
+  },
+  "ru": {
+    "title": "Кондиционер Naviclim – состояние",
+    "refresh": "Обновить",
+    "updated": "Последнее обновление",
+    "never": "никогда",
+    "devices": "устройств",
+    "online": "в сети",
+    "on": "включено",
+    "offline": "не в сети",
+    "none": "Кондиционеров Naviclim пока нет. Добавьте через Устройства → Добавить устройство → Naviclim.",
+    "error": "Не удалось загрузить состояние",
+    "power": "Питание",
+    "mode": "Режим",
+    "fan": "Скорость вентилятора",
+    "louver": "Положение жалюзи",
+    "cooling": "Целевая температура охлаждения",
+    "heating": "Целевая температура обогрева",
+    "temp": "Текущая температура",
+    "seen": "Последнее сообщение",
+    "onMode": "Режим при включении",
+    "lastMode": "Последний активный режим",
+    "ieee": "Адрес Zigbee",
+    "powerOn": "Вкл.",
+    "powerOff": "Выкл.",
+    "agoFmt": "{n} {u} назад",
+    "s": "с",
+    "m": "мин",
+    "h": "ч",
+    "louverNote": "последнее значение, заданное в Homey (модуль его не передаёт)",
+    "fanNote": "уровень 1 (тихий) запоминает Homey; модуль передаёт его как 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Выкл.",
+      "auto": "Авто",
+      "cool": "Охлаждение",
+      "heat": "Обогрев",
+      "dry": "Осушение",
+      "fan_only": "Только вентилятор"
+    },
+    "onModes": {
+      "last": "Последний использованный режим",
+      "auto": "Авто",
+      "cool": "Охлаждение",
+      "heat": "Обогрев",
+      "fan_only": "Только вентилятор"
+    },
+    "fans": {
+      "auto": "Авто",
+      "1": "1 (тихий)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Открыто на четверть",
+      "half_open": "Открыто наполовину",
+      "three_quarters_open": "Открыто на три четверти",
+      "fully_open": "Полностью открыто"
+    },
+    "group": "Группа наружного блока",
+    "role": "Роль в группе",
+    "roles": {
+      "master": "Ведущий",
+      "follower": "Ведомый",
+      "unknown": "Неизвестно"
+    }
+  },
+  "pl": {
+    "title": "Klimatyzator Naviclim – stan",
+    "refresh": "Odśwież",
+    "updated": "Ostatnia aktualizacja",
+    "never": "nigdy",
+    "devices": "urządzeń",
+    "online": "online",
+    "on": "włączone",
+    "offline": "offline",
+    "none": "Brak klimatyzatorów Naviclim. Dodaj jeden przez Urządzenia → Dodaj urządzenie → Naviclim.",
+    "error": "Nie udało się wczytać stanu",
+    "power": "Zasilanie",
+    "mode": "Tryb",
+    "fan": "Prędkość wentylatora",
+    "louver": "Pozycja lamel",
+    "cooling": "Temperatura docelowa chłodzenia",
+    "heating": "Temperatura docelowa grzania",
+    "temp": "Aktualna temperatura",
+    "seen": "Ostatni raport",
+    "onMode": "Tryb po włączeniu",
+    "lastMode": "Ostatnio aktywny tryb",
+    "ieee": "Adres Zigbee",
+    "powerOn": "Włączony",
+    "powerOff": "Wyłączony",
+    "agoFmt": "{n} {u} temu",
+    "s": "s",
+    "m": "min",
+    "h": "godz.",
+    "louverNote": "ostatnia wartość ustawiona przez Homey (moduł jej nie raportuje)",
+    "fanNote": "poziom 1 (cichy) zapamiętuje Homey; moduł zgłasza go jako 2",
+    "unknown": "–",
+    "modes": {
+      "off": "Wył.",
+      "auto": "Auto",
+      "cool": "Chłodzenie",
+      "heat": "Grzanie",
+      "dry": "Osuszanie",
+      "fan_only": "Tylko wentylator"
+    },
+    "onModes": {
+      "last": "Ostatnio używany tryb",
+      "auto": "Auto",
+      "cool": "Chłodzenie",
+      "heat": "Grzanie",
+      "fan_only": "Tylko wentylator"
+    },
+    "fans": {
+      "auto": "Auto",
+      "1": "1 (cichy)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "Otwarte w ćwierci",
+      "half_open": "Otwarte do połowy",
+      "three_quarters_open": "Otwarte w trzech czwartych",
+      "fully_open": "Całkowicie otwarte"
+    },
+    "group": "Grupa jednostki zewnętrznej",
+    "role": "Rola w grupie",
+    "roles": {
+      "master": "Nadrzędna",
+      "follower": "Podrzędna",
+      "unknown": "Nieznana"
+    }
+  },
+  "ko": {
+    "title": "Naviclim 에어컨 – 상태",
+    "refresh": "새로고침",
+    "updated": "마지막 업데이트",
+    "never": "없음",
+    "devices": "기기",
+    "online": "온라인",
+    "on": "켜짐",
+    "offline": "오프라인",
+    "none": "Naviclim 에어컨이 아직 없습니다. 기기 → 기기 추가 → Naviclim에서 추가하세요.",
+    "error": "상태를 불러오지 못했습니다",
+    "power": "전원",
+    "mode": "모드",
+    "fan": "풍량",
+    "louver": "루버 위치",
+    "cooling": "냉방 목표 온도",
+    "heating": "난방 목표 온도",
+    "temp": "현재 온도",
+    "seen": "마지막 보고",
+    "onMode": "켤 때 모드",
+    "lastMode": "마지막 활성 모드",
+    "ieee": "Zigbee 주소",
+    "powerOn": "켜짐",
+    "powerOff": "꺼짐",
+    "agoFmt": "{n}{u} 전",
+    "s": "초",
+    "m": "분",
+    "h": "시간",
+    "louverNote": "Homey가 마지막으로 설정한 값(모듈에서 읽을 수 없음)",
+    "fanNote": "1단계(저소음)는 Homey가 기억하며, 모듈은 이를 2단계로 보고합니다",
+    "unknown": "–",
+    "modes": {
+      "off": "끔",
+      "auto": "자동",
+      "cool": "냉방",
+      "heat": "난방",
+      "dry": "제습",
+      "fan_only": "송풍"
+    },
+    "onModes": {
+      "last": "마지막 사용 모드",
+      "auto": "자동",
+      "cool": "냉방",
+      "heat": "난방",
+      "fan_only": "송풍"
+    },
+    "fans": {
+      "auto": "자동",
+      "1": "1 (저소음)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "1/4 열림",
+      "half_open": "1/2 열림",
+      "three_quarters_open": "3/4 열림",
+      "fully_open": "완전 열림"
+    },
+    "group": "실외기 그룹",
+    "role": "그룹 내 역할",
+    "roles": {
+      "master": "마스터",
+      "follower": "팔로워",
+      "unknown": "알 수 없음"
+    }
+  },
+  "ar": {
+    "title": "مكيف Naviclim – الحالة",
+    "refresh": "تحديث",
+    "updated": "آخر تحديث",
+    "never": "أبدًا",
+    "devices": "أجهزة",
+    "online": "متصل",
+    "on": "قيد التشغيل",
+    "offline": "غير متصل",
+    "none": "لا توجد مكيفات Naviclim بعد. أضف واحدًا من الأجهزة ← إضافة جهاز ← Naviclim.",
+    "error": "تعذّر تحميل الحالة",
+    "power": "التشغيل",
+    "mode": "الوضع",
+    "fan": "سرعة المروحة",
+    "louver": "موضع الشفرات",
+    "cooling": "درجة الحرارة المستهدفة للتبريد",
+    "heating": "درجة الحرارة المستهدفة للتدفئة",
+    "temp": "درجة الحرارة الحالية",
+    "seen": "آخر تقرير",
+    "onMode": "الوضع عند التشغيل",
+    "lastMode": "آخر وضع نشط",
+    "ieee": "عنوان Zigbee",
+    "powerOn": "يعمل",
+    "powerOff": "متوقف",
+    "agoFmt": "منذ {n} {u}",
+    "s": "ث",
+    "m": "د",
+    "h": "س",
+    "louverNote": "آخر قيمة ضبطها Homey (لا يمكن قراءتها من الوحدة)",
+    "fanNote": "يتذكر Homey المستوى 1 (هادئ)؛ وتبلغ الوحدة عنه كمستوى 2",
+    "unknown": "–",
+    "modes": {
+      "off": "إيقاف",
+      "auto": "تلقائي",
+      "cool": "تبريد",
+      "heat": "تدفئة",
+      "dry": "إزالة الرطوبة",
+      "fan_only": "مروحة فقط"
+    },
+    "onModes": {
+      "last": "آخر وضع مستخدم",
+      "auto": "تلقائي",
+      "cool": "تبريد",
+      "heat": "تدفئة",
+      "fan_only": "مروحة فقط"
+    },
+    "fans": {
+      "auto": "تلقائي",
+      "1": "1 (هادئ)",
+      "2": "2",
+      "3": "3",
+      "4": "4"
+    },
+    "louvers": {
+      "quarter_open": "ربع مفتوح",
+      "half_open": "نصف مفتوح",
+      "three_quarters_open": "ثلاثة أرباع مفتوح",
+      "fully_open": "مفتوح بالكامل"
+    },
+    "group": "مجموعة الوحدة الخارجية",
+    "role": "الدور في المجموعة",
+    "roles": {
+      "master": "رئيسية",
+      "follower": "تابعة",
+      "unknown": "غير معروفة"
+    }
+  }
+};
+
+let T = TEXT.en;
+let lastLoaded = null;
+
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined && text !== null) e.textContent = text;
+  return e;
+}
+
+function temp(v) { return typeof v === 'number' ? `${v.toFixed(1)} °C` : T.unknown; }
+
+function agoText(n, u) { return T.agoFmt.replace('{n}', n).replace('{u}', u); }
+
+function ago(ts) {
+  if (!ts) return T.unknown;
+  const s = Math.max(0, Math.round((Date.now() - ts) / 1000));
+  if (s < 90) return agoText(s, T.s);
+  const m = Math.round(s / 60);
+  if (m < 90) return agoText(m, T.m);
+  return agoText(Math.round(m / 60), T.h);
+}
+
+function row(card, key, value, note) {
+  const r = el('div', 'row');
+  r.appendChild(el('span', 'k', key));
+  const v = el('span', 'v', value);
+  if (note) v.appendChild(el('span', 'note', note));
+  r.appendChild(v);
+  card.appendChild(r);
+}
+
+function render(devices) {
+  document.getElementById('title').textContent = T.title;
+  const online = devices.filter((d) => d.available).length;
+  const on = devices.filter((d) => d.available && d.onoff).length;
+
+  const chips = document.getElementById('chips');
+  chips.textContent = '';
+  [`${devices.length} ${T.devices}`, `${online} ${T.online}`, `${on} ${T.on}`, `${devices.length - online} ${T.offline}`]
+    .forEach((t) => chips.appendChild(el('span', 'chip', t)));
+
+  const content = document.getElementById('content');
+  content.textContent = '';
+  if (!devices.length) { content.appendChild(el('div', 'empty', T.none)); return; }
+
+  const grid = el('div', 'grid');
+  devices.forEach((d) => {
+    const card = el('div', 'card');
+    const h = el('h2');
+    h.appendChild(el('span', `dot ${d.available ? (d.onoff ? '' : 'off') : 'bad'}`));
+    h.appendChild(el('span', null, d.name));
+    card.appendChild(h);
+
+    row(card, T.power, d.onoff ? T.powerOn : T.powerOff);
+    row(card, T.mode, T.modes[d.mode] || T.unknown);
+    row(card, T.cooling, temp(d.targetCooling));
+    row(card, T.heating, temp(d.targetHeating));
+    row(card, T.temp, temp(d.temperature));
+    row(card, T.fan, T.fans[d.fanSpeed] || T.unknown, d.fanSpeed === '1' || d.fanSpeed === '2' ? T.fanNote : null);
+    row(card, T.louver, T.louvers[d.louver] || T.unknown, d.louver ? T.louverNote : null);
+    row(card, T.onMode, T.onModes[d.onMode] || T.unknown);
+    row(card, T.lastMode, T.modes[d.lastActiveMode] || T.unknown);
+    if (d.group) {
+      row(card, T.group, d.group);
+      row(card, T.role, T.roles[d.role] || T.unknown);
+    }
+    row(card, T.seen, ago(d.lastSeen));
+    row(card, T.ieee, d.ieee || T.unknown);
+    grid.appendChild(card);
+  });
+  content.appendChild(grid);
+}
+
+function onHomeyReady(Homey) {
+  let lang = 'en';
+  try { lang = String((Homey.getLanguage && Homey.getLanguage()) || navigator.language || 'en').slice(0, 2); } catch (e) { /* keep en */ }
+  if (lang === 'nb' || lang === 'nn') lang = 'no';
+  T = Object.assign({}, TEXT.en, TEXT[lang] || {});
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = TEXT[lang] ? lang : 'en';
+  const btn = document.getElementById('refresh');
+  btn.textContent = T.refresh;
+
+  function load() {
+    Homey.api('GET', '/status', null, (err, devices) => {
+      if (err) {
+        const content = document.getElementById('content');
+        content.textContent = '';
+        content.appendChild(el('div', 'err', `${T.error}: ${err.message || err}`));
+        return;
+      }
+      lastLoaded = new Date();
+      document.getElementById('updated').textContent = `${T.updated}: ${lastLoaded.toLocaleTimeString()}`;
+      render(devices || []);
+    });
+  }
+
+  btn.addEventListener('click', load);
+  document.getElementById('title').textContent = T.title;
+  document.getElementById('updated').textContent = `${T.updated}: ${T.never}`;
+  load();
+  setInterval(load, 10000);
+  Homey.ready();
+}
+</script>
+</body>
+</html>
