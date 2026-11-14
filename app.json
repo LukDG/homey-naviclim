@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "be.lukdg.naviclim",
-  "version": "2026.1112.1",
+  "version": "2026.1114.1",
   "compatibility": ">=12.0.0",
   "sdk": 3,
   "platforms": [
@@ -755,7 +755,7 @@
         "ko": "Naviclim 에어컨",
         "ar": "مكيف Naviclim"
       },
-      "class": "airconditioning",
+      "class": "thermostat",
       "platforms": [
         "local"
       ],
@@ -764,7 +764,10 @@
       ],
       "capabilities": [
         "onoff",
+        "target_temperature",
         "ac_mode",
+        "ac_status",
+        "thermostat_mode",
         "target_temperature.cooling",
         "target_temperature.heating",
         "measure_temperature",
@@ -808,6 +811,14 @@
             "ko": "난방 목표 온도",
             "ar": "درجة الحرارة المستهدفة للتدفئة"
           },
+          "min": 16,
+          "max": 30,
+          "step": 0.5
+        },
+        "thermostat_mode": {
+          "uiComponent": null
+        },
+        "target_temperature": {
           "min": 16,
           "max": 30,
           "step": 0.5
@@ -857,6 +868,79 @@
         }
       },
       "settings": [
+        {
+          "id": "device_class",
+          "type": "dropdown",
+          "value": "thermostat",
+          "label": {
+            "en": "Show as (device class)",
+            "nl": "Weergeven als (apparaatklasse)",
+            "de": "Anzeigen als (Geräteklasse)",
+            "fr": "Afficher comme (classe d’appareil)",
+            "it": "Mostra come (classe del dispositivo)",
+            "sv": "Visa som (enhetsklass)",
+            "no": "Vis som (enhetsklasse)",
+            "es": "Mostrar como (clase de dispositivo)",
+            "da": "Vis som (enhedsklasse)",
+            "ru": "Показывать как (класс устройства)",
+            "pl": "Wyświetlaj jako (klasa urządzenia)",
+            "ko": "표시 방식(기기 클래스)",
+            "ar": "العرض كـ (فئة الجهاز)"
+          },
+          "hint": {
+            "en": "Thermostat works best with Google Home, Apple Home and Alexa: they get on/off, mode (off, heat, cool, auto) and target temperature. Air conditioning is Homey's own class for air conditioners, but voice assistants may then only show on/off. Fan speed, louver position and dry/fan-only mode are only available in Homey.",
+            "nl": "Thermostaat werkt het best met Google Home, Apple Home en Alexa: die krijgen aan/uit, modus (uit, verwarmen, koelen, auto) en doeltemperatuur. Airconditioning is de eigen klasse van Homey voor airco’s, maar spraakassistenten tonen dan mogelijk alleen aan/uit. Ventilatorsnelheid, lamelpositie en ontvochtigen/alleen ventilator zijn alleen in Homey beschikbaar.",
+            "de": "Thermostat funktioniert am besten mit Google Home, Apple Home und Alexa: Sie erhalten Ein/Aus, Modus (aus, heizen, kühlen, auto) und Zieltemperatur. Klimaanlage ist Homeys eigene Klasse für Klimageräte, aber Sprachassistenten zeigen dann eventuell nur Ein/Aus. Lüfterstufe, Lamellenposition sowie Entfeuchten/Nur Lüfter gibt es nur in Homey.",
+            "fr": "Thermostat fonctionne le mieux avec Google Home, Apple Home et Alexa : ils reçoivent marche/arrêt, mode (arrêt, chaud, froid, auto) et température cible. Climatisation est la classe propre à Homey pour les climatiseurs, mais les assistants vocaux peuvent alors n’afficher que marche/arrêt. La vitesse du ventilateur, la position du volet et les modes déshumidification/ventilation seule ne sont disponibles que dans Homey.",
+            "it": "Termostato funziona meglio con Google Home, Apple Home e Alexa: ricevono accensione/spegnimento, modalità (spento, riscaldamento, raffreddamento, auto) e temperatura obiettivo. Condizionatore è la classe di Homey per i condizionatori, ma gli assistenti vocali potrebbero mostrare solo accensione/spegnimento. Velocità della ventola, posizione delle alette e modalità deumidificazione/solo ventilazione sono disponibili solo in Homey.",
+            "sv": "Termostat fungerar bäst med Google Home, Apple Home och Alexa: de får på/av, läge (av, värme, kyla, auto) och måltemperatur. Luftkonditionering är Homeys egen klass för luftkonditionering, men röstassistenter kan då bara visa på/av. Fläkthastighet, lamellposition samt avfuktning/endast fläkt finns bara i Homey.",
+            "no": "Termostat fungerer best med Google Home, Apple Home og Alexa: de får på/av, modus (av, varme, kjøling, auto) og måltemperatur. Klimaanlegg er Homeys egen klasse for klimaanlegg, men stemmeassistenter kan da bare vise på/av. Viftehastighet, lamellposisjon og avfukting/kun vifte finnes bare i Homey.",
+            "es": "Termostato funciona mejor con Google Home, Apple Home y Alexa: reciben encendido/apagado, modo (apagado, calor, frío, auto) y temperatura objetivo. Aire acondicionado es la clase propia de Homey para aires acondicionados, pero los asistentes de voz podrían mostrar solo encendido/apagado. La velocidad del ventilador, la posición de las lamas y los modos deshumidificar/solo ventilador solo están disponibles en Homey.",
+            "da": "Termostat fungerer bedst med Google Home, Apple Home og Alexa: de får tænd/sluk, tilstand (fra, varme, køling, auto) og måltemperatur. Aircondition er Homeys egen klasse til airconditionanlæg, men stemmeassistenter viser så måske kun tænd/sluk. Ventilatorhastighed, lamelposition og affugtning/kun ventilator findes kun i Homey.",
+            "ru": "Термостат лучше всего работает с Google Home, Apple Home и Alexa: они получают включение/выключение, режим (выкл., обогрев, охлаждение, авто) и целевую температуру. «Кондиционер» — собственный класс Homey для кондиционеров, но голосовые ассистенты тогда могут показывать только включение/выключение. Скорость вентилятора, положение жалюзи и режимы осушения/только вентилятор доступны только в Homey.",
+            "pl": "Termostat działa najlepiej z Google Home, Apple Home i Alexa: otrzymują one włączanie/wyłączanie, tryb (wył., grzanie, chłodzenie, auto) i temperaturę docelową. Klimatyzator to własna klasa Homey dla klimatyzatorów, ale asystenci głosowi mogą wtedy pokazywać tylko włączanie/wyłączanie. Prędkość wentylatora, pozycja lamel oraz tryby osuszania/tylko wentylator są dostępne tylko w Homey.",
+            "ko": "온도조절기는 Google Home, Apple Home, Alexa와 가장 잘 작동합니다. 켜기/끄기, 모드(끔, 난방, 냉방, 자동), 목표 온도를 받습니다. 에어컨은 Homey의 에어컨 전용 클래스이지만, 이 경우 음성 비서에는 켜기/끄기만 표시될 수 있습니다. 풍량, 루버 위치, 제습/송풍 모드는 Homey에서만 사용할 수 있습니다.",
+            "ar": "يعمل منظم الحرارة بشكل أفضل مع Google Home وApple Home وAlexa: إذ تتلقى التشغيل/الإيقاف والوضع (إيقاف، تدفئة، تبريد، تلقائي) ودرجة الحرارة المستهدفة. أما «مكيف الهواء» فهي فئة Homey الخاصة بالمكيفات، لكن قد تعرض المساعدات الصوتية حينها التشغيل/الإيقاف فقط. سرعة المروحة وموضع الشفرات وأوضاع إزالة الرطوبة/المروحة فقط متاحة في Homey فقط."
+          },
+          "values": [
+            {
+              "id": "thermostat",
+              "label": {
+                "en": "Thermostat (best for Google Home)",
+                "nl": "Thermostaat (beste voor Google Home)",
+                "de": "Thermostat (am besten für Google Home)",
+                "fr": "Thermostat (idéal pour Google Home)",
+                "it": "Termostato (migliore per Google Home)",
+                "sv": "Termostat (bäst för Google Home)",
+                "no": "Termostat (best for Google Home)",
+                "es": "Termostato (mejor para Google Home)",
+                "da": "Termostat (bedst til Google Home)",
+                "ru": "Термостат (лучше для Google Home)",
+                "pl": "Termostat (najlepszy dla Google Home)",
+                "ko": "온도조절기(Google Home에 최적)",
+                "ar": "منظم حرارة (الأفضل لـ Google Home)"
+              }
+            },
+            {
+              "id": "airconditioning",
+              "label": {
+                "en": "Air conditioning",
+                "nl": "Airconditioning",
+                "de": "Klimaanlage",
+                "fr": "Climatisation",
+                "it": "Condizionatore",
+                "sv": "Luftkonditionering",
+                "no": "Klimaanlegg",
+                "es": "Aire acondicionado",
+                "da": "Aircondition",
+                "ru": "Кондиционер",
+                "pl": "Klimatyzator",
+                "ko": "에어컨",
+                "ar": "مكيف هواء"
+              }
+            }
+          ]
+        },
         {
           "id": "on_mode",
           "type": "dropdown",
@@ -1491,6 +1575,27 @@
           }
         }
       ]
+    },
+    "ac_status": {
+      "type": "string",
+      "title": {
+        "en": "Status",
+        "nl": "Status",
+        "de": "Status",
+        "fr": "État",
+        "it": "Stato",
+        "sv": "Status",
+        "no": "Status",
+        "es": "Estado",
+        "da": "Status",
+        "ru": "Состояние",
+        "pl": "Stan",
+        "ko": "상태",
+        "ar": "الحالة"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
     }
   }
 }

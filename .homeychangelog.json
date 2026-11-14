@@ -29,7 +29,22 @@
     "ko": "마스터/팔로워 기능이 개선되었습니다.",
     "ar": "تحسين وظيفة الوحدة الرئيسية والتابعة."
   },
-  "2026.1112.1": {
-    "en": "Supports clustering outdoor unit (master/slave)"
+  "2026.1114.0": {
+    "en": "Better support for Google Home, Apple Home and Alexa (thermostat mode and target temperature). New setting to show the device as Thermostat or Air conditioning.",
+    "nl": "Betere ondersteuning voor Google Home, Apple Home en Alexa (thermostaatmodus en doeltemperatuur). Nieuwe instelling om het toestel als Thermostaat of Airconditioning weer te geven.",
+    "de": "Bessere Unterstützung für Google Home, Apple Home und Alexa (Thermostatmodus und Zieltemperatur). Neue Einstellung, um das Gerät als Thermostat oder Klimaanlage anzuzeigen.",
+    "fr": "Meilleure prise en charge de Google Home, Apple Home et Alexa (mode thermostat et température cible). Nouveau réglage pour afficher l’appareil comme Thermostat ou Climatisation.",
+    "it": "Migliore supporto per Google Home, Apple Home e Alexa (modalità termostato e temperatura obiettivo). Nuova impostazione per mostrare il dispositivo come Termostato o Condizionatore.",
+    "sv": "Bättre stöd för Google Home, Apple Home och Alexa (termostatläge och måltemperatur). Ny inställning för att visa enheten som Termostat eller Luftkonditionering.",
+    "no": "Bedre støtte for Google Home, Apple Home og Alexa (termostatmodus og måltemperatur). Ny innstilling for å vise enheten som Termostat eller Klimaanlegg.",
+    "es": "Mejor compatibilidad con Google Home, Apple Home y Alexa (modo termostato y temperatura objetivo). Nuevo ajuste para mostrar el dispositivo como Termostato o Aire acondicionado.",
+    "da": "Bedre understøttelse af Google Home, Apple Home og Alexa (termostattilstand og måltemperatur). Ny indstilling til at vise enheden som Termostat eller Aircondition.",
+    "ru": "Улучшена поддержка Google Home, Apple Home и Alexa (режим термостата и целевая температура). Новая настройка для отображения устройства как «Термостат» или «Кондиционер».",
+    "pl": "Lepsza obsługa Google Home, Apple Home i Alexa (tryb termostatu i temperatura docelowa). Nowe ustawienie wyświetlania urządzenia jako Termostat lub Klimatyzator.",
+    "ko": "Google Home, Apple Home, Alexa 지원이 개선되었습니다(온도조절기 모드 및 목표 온도). 기기를 온도조절기 또는 에어컨으로 표시하는 새 설정이 추가되었습니다.",
+    "ar": "دعم أفضل لـ Google Home وApple Home وAlexa (وضع منظم الحرارة ودرجة الحرارة المستهدفة). إعداد جديد لعرض الجهاز كمنظم حرارة أو مكيف هواء."
+  },
+  "2026.1114.1": {
+    "en": "Implemented Google Home support and tiles status."
   }
 }
